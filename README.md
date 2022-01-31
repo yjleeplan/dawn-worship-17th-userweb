@@ -26,6 +26,10 @@
   - Redux (상태 관리)
   - Axios (HTTP 통신)
 
+## Template
+- CRA (Create React App)
+SPA(Single Page Application) 기반 React Application을 개발하기 위한 프로젝트 생성을 지원하는 Facebook의 공식 지원 CLI
+
 ## CI/CD
 - Github Action
 
