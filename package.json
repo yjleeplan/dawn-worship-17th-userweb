@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "cp-cli ./config/.env.dev ./.env",
     "prod": "cp-cli ./config/.env.prod ./.env",
-    "build": "react-scripts build",
+    "build": "npm run sync-assets && react-scripts build",
     "build-dev": "npm run dev && npm run build",
     "build-prod": "npm run prod && npm run build",
     "start": "react-scripts start",
-    "start-dev": "npm run dev && npm-run-all -p watch-assets start",
-    "start-prod": "npm run prod && npm-run-all -p watch-assets start",
-    "sync-assets": "rsync -avzh --delete ./src/assets/ ./public/assets/",
-    "watch-assets": "chokidar \"src/assets\""
+    "start-dev": "npm run dev && npm-run-all -p sync-assets watch-assets start",
+    "start-prod": "npm run prod && npm-run-all -p sync-assets watch-assets start",
+    "sync-assets": "cp -r ./src/assets/ ./public/assets/",
+    "watch-assets": "chokidar \"src/assets\" -c \"npm run sync-assets\""
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
