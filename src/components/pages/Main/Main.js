@@ -1,8 +1,6 @@
 import React from 'react';
 
-const AttendanceCheck = ({
-  history,
-}) => {
+const Main = ({history}) => {
   return (
     <>
       <div>출석체크</div>
@@ -10,4 +8,4 @@ const AttendanceCheck = ({
   );
 };
 
-export default AttendanceCheck;
+export default Main;

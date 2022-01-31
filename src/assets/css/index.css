@@ -1,7 +1,45 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 
 html, body, #root {
-  font-family:'Noto Sans CJK KR', Noto Sans KR, sans-serif !important;
-  font-weight: 500;
-  margin: 0;
+	font-family:'Noto Sans CJK KR', Noto Sans KR, sans-serif !important;
+	font-weight: 500;
+	margin: 0;
 }
+
+/* Sample Layout */
+#sample-layout {
+	box-sizing: border-box;
+	display: flex;
+    flex: auto;
+    flex-direction: column;
+    min-height: 0;
+}
+#sample-layout #header {
+	/* border: 1px soild #000; */
+	color: #fff;
+	background: #7dbcea;
+	height: 160px;
+    padding: 0 50px;
+	line-height: 160px;
+	flex: 0 0 auto;
+	text-align: center;
+}
+#sample-layout #content {
+	/* border: 1px soild #000; */
+	min-height: 640px;
+    color: #fff;
+    line-height: 640px;
+	background: rgba(16, 142, 233, 1);
+	flex: auto;
+	text-align: center;
+}
+#sample-layout #footer {
+	border: 1px soild #000;
+	height: 140px;
+	color: #fff;
+    line-height: 140px;
+	background: rgb(31, 16, 233);
+	flex: auto;
+	text-align: center;
+}
+/* Sample Layout */
