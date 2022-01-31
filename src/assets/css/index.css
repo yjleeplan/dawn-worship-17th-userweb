@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+
+html, body, #root {
+  font-family:'Noto Sans CJK KR', Noto Sans KR, sans-serif !important;
+  font-weight: 500;
+  margin: 0;
+}
