@@ -57,20 +57,9 @@ html, body, #root {
 	min-height: 6vh;
 	padding: 20px 0px;
 	margin: auto;
-	flex: 0 0 auto;
-	display: flex;
-    flex-flow: row wrap;
 }
-#main-layout #header .header-left {
-	display: block;
-    flex: 0 0 90%;
-    max-width: 90%;
-}
-#main-layout #header .kuemkwang-logo {
-	width: 140px;
-	height: 34px;
-	background-image: url(/src/assets/images/logo.png);
-	background-repeat: no-repeat;
+#main-layout #header .header-right {
+	text-align: right;
 }
 #main-layout #header .user-add-button .anticon.anticon-user-add svg {
 	width: 25px;
@@ -78,13 +67,13 @@ html, body, #root {
 	color: #FFF;
 }
 #main-layout #content {
-	width: 92%;
+	width: 80%;
 	min-height: 94vh;
 	margin: auto;
 	flex: auto;
 }
 #main-layout #content .search-wrap {
-	margin-top: 30%;
+	margin-top: 25%;
 }
 #main-layout #content .search-wrap .ant-input-affix-wrapper {
 	height: 45px;

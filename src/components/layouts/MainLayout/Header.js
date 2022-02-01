@@ -1,19 +1,37 @@
-import React from 'react';
-import {UserAddOutlined} from '@ant-design/icons';
+import React, { useState } from 'react';
+import { UserAddOutlined } from '@ant-design/icons';
+import logo from '../../../assets/images/logo.png';
+import { Row, Col, Image } from 'antd';
+import UserAddModal from '../../common/modal/UserAddModal/UserAddModal';
 
 const Header = () => {
+	/** State */
+	const [userAddModalVisible, setUserAddModalVisible] = useState(false);
+
+	// 사용자 등록 모달 오픈
+	const handleUserAddModalOpen = () => {
+		setUserAddModalVisible(true);
+	};
+
+	// 사용자 등록 모달 닫기
+	const handleUserAddModalClose = () => {
+		setUserAddModalVisible(false);
+	};
+
 	return (
       	<div id='header'>
-			<div className='header-left'>
-        		<div className='kuemkwang-logo'>
-					{/* <img src='src/assets/images/logo.png' alt='kkk'/> */}
-				</div>
-			</div>
-			<div className='header-right'>
-				<span className='user-add-button'>
-					<UserAddOutlined />
-				</span>
-			</div>
+			<Row>
+				<Col span={20}>
+					<Image width={102} height={25} src={logo} />
+				</Col>
+				<Col span={4} className='header-right'>
+					<span className='user-add-button'>
+						<UserAddOutlined onClick={handleUserAddModalOpen}/>
+					</span>
+				</Col>
+			</Row>
+
+			<UserAddModal visible={userAddModalVisible} onCancel={handleUserAddModalClose}/>
       	</div>
 	);
 };
