@@ -51,11 +51,12 @@ html, body, #root {
 	display: flex;
     flex: auto;
 	flex-direction: column;
-	/* background-image: url(/src/assets/images/background.jpg); */
-	background-image: url(/src/assets/images/happysun_190218__030.jpg);
+	background-image: url(/src/assets/images/background.jpg);
+	/* background-image: url(/src/assets/images/happysun_190218__030.jpg); */
 	background-repeat: no-repeat;
 	background-position: center;
     background-size: cover;
+	/* background-color: currentColor; */
     bottom: 0;
     right: 0;
     left: 0;
@@ -84,10 +85,13 @@ html, body, #root {
 }
 #main-layout #content .search-wrap {
 	margin-top: 27%;
+	text-align: center;
 }
 #main-layout #content .search-wrap .ant-input-affix-wrapper {
 	height: 45px;
 	border-radius: 20px;
+	max-width: 500px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 #main-layout #content .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
 	color: #4285f4;
@@ -96,8 +100,13 @@ html, body, #root {
 #main-layout #content .grid-wrap {
 	margin-top: 40%;
 }
+#main-layout #content .grid-wrap .ag-theme-alpine {
+	border-radius: 10px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 30%);
+}
 .ag-theme-alpine .ag-root-wrapper {
 	border: none;
+	border-radius: 10px;
 }
 .ag-header-cell-label {
 	justify-content: center;

@@ -98,6 +98,7 @@ const Main = ({history}) => {
                                 rowData={resultList}
                                 rowHeight={rowHeight}
                                 headerHeight={headerHeight}
+                                suppressMovableColumns={true}
                                 onCellClicked={handleCellClicked} />
                         </div>
                     }
