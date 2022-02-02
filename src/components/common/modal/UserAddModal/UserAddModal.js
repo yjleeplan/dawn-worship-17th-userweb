@@ -54,7 +54,6 @@ const UserAddModal = ({ visible, onCancel }) => {
             okText: '확인',
             cancelText: '취소',
             onOk: () => {
-                console.log(values);
                 message.success('정상적으로 등록되었습니다');
                 handleCancel();
             },
@@ -64,7 +63,7 @@ const UserAddModal = ({ visible, onCancel }) => {
     return (
         <Modal
             wrapClassName='user-add-modal-wrap'
-            title='사용자 등록'
+            title='출석 명단 등록'
             visible={visible}
             onOk={handleSave}
             onCancel={handleCancel}
@@ -78,16 +77,16 @@ const UserAddModal = ({ visible, onCancel }) => {
                 initialValues={initialValues}
                 onFinish={onFinish}
                 labelCol={{ span: 4 }}>
-                <Form.Item label='성명' required className='form-item-wrap'>
+                <Form.Item label='이름' required className='form-item-wrap'>
                     <Form.Item
                         name='name'
                         rules={[
                             {
                                 required: true,
-                                message: '성명을 입력해주세요',
+                                message: '이름을 입력해주세요',
                             },
                         ]}>
-                        <Input placeholder='성명을 입력해주세요' />
+                        <Input placeholder='이름을 입력해주세요' />
                     </Form.Item>
                 </Form.Item>
                 <Form.Item label='생년월일' required className='form-item-wrap'>

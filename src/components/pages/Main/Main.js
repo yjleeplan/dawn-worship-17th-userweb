@@ -25,7 +25,7 @@ const Main = ({history}) => {
     // 검색결과 그리드 컬럼 정의
     const columnDefs = [
         {
-            headerName : '성명',
+            headerName : '이름',
             field: 'name',
             width: 90,
             cellStyle: { textAlign: 'center' }
@@ -55,11 +55,17 @@ const Main = ({history}) => {
 
     /** State */
     const [resultList, setResultList] = useState([]);
+    // const [selectedRowData, setSelectedRowData] = useState({});
 
     // 검색결과 그리드 Height
     const getAgGridHeight = () => {
         const totalHeight = (headerHeight + 1) + (resultList.length * rowHeight);
         return totalHeight > 320 ? 320 : totalHeight;
+    };
+
+    // 그리드 셀 클릭
+    const handleCellClicked = ({data}) => {
+        // setSelectedRowData(data);
     };
 
     // 검색
@@ -69,8 +75,6 @@ const Main = ({history}) => {
 
     // Form Submit
     const onFinish = (values) => {
-        console.log(values);
-
         setResultList(sampleData);
     };
 
@@ -93,7 +97,8 @@ const Main = ({history}) => {
                                 columnDefs={columnDefs}
                                 rowData={resultList}
                                 rowHeight={rowHeight}
-                                headerHeight={headerHeight} />
+                                headerHeight={headerHeight}
+                                onCellClicked={handleCellClicked} />
                         </div>
                     }
                 </div>
