@@ -55,7 +55,7 @@ const Main = ({history}) => {
 
     /** State */
     const [resultList, setResultList] = useState([]);
-    const [selectedRowData, setSelectedRowData] = useState({});
+    // const [selectedRowData, setSelectedRowData] = useState({});
 
     // 검색결과 그리드 Height
     const getAgGridHeight = () => {
@@ -65,9 +65,7 @@ const Main = ({history}) => {
 
     // 그리드 셀 클릭
     const handleCellClicked = ({data}) => {
-        console.log(data);
-        
-        setSelectedRowData(data);
+        // setSelectedRowData(data);
     };
 
     // 검색
@@ -77,8 +75,6 @@ const Main = ({history}) => {
 
     // Form Submit
     const onFinish = (values) => {
-        console.log(values);
-        
         setResultList(sampleData);
     };
 
