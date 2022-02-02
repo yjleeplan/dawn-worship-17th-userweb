@@ -54,7 +54,6 @@ const UserAddModal = ({ visible, onCancel }) => {
             okText: '확인',
             cancelText: '취소',
             onOk: () => {
-                console.log(values);
                 message.success('정상적으로 등록되었습니다');
                 handleCancel();
             },
