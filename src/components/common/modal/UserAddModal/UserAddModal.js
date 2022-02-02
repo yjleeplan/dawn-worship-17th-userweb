@@ -11,17 +11,17 @@ const UserAddModal = ({ visible, onCancel }) => {
 
     // 소속 리스트
     const deptOptions = [
-        {label: '믿음1 (양지동)', value: '믿음1 (양지동)'},
-        {label: '믿음2 (단대동,산성동)', value: '믿음2 (단대동,산성동)'},
-        {label: '믿음3 (신흥동,수진동,태평동)', value: '믿음3 (신흥동,수진동,태평동)'},
-        {label: '소망1 (은행동)', value: '소망1 (은행동)'},
-        {label: '소망2 (금광2동)', value: '소망2 (금광2동)'},
-        {label: '소망3 (금광1동,상대원동,중앙동)', value: '소망3 (금광1동,상대원동,중앙동)'},
-        {label: '소망4 (성남동,하대원동,도촌동)', value: '소망4 (성남동,하대원동,도촌동)'},
-        {label: '사랑1 (분당구)', value: '사랑1 (분당구)'},
-        {label: '사랑2 (광주시)', value: '사랑2 (광주시)'},
-        {label: '사랑3 (용인시)', value: '사랑3 (용인시)'},
-        {label: '사랑4 (서울/경기외곽)', value: '사랑4 (서울/경기외곽)'},
+        {label: '믿음1', value: '믿음1'},
+        {label: '믿음2', value: '믿음2'},
+        {label: '믿음3', value: '믿음3'},
+        {label: '소망1', value: '소망1'},
+        {label: '소망2', value: '소망2'},
+        {label: '소망3', value: '소망3'},
+        {label: '소망4', value: '소망4'},
+        {label: '사랑1', value: '사랑1'},
+        {label: '사랑2', value: '사랑2'},
+        {label: '사랑3', value: '사랑3'},
+        {label: '사랑4', value: '사랑4'},
         {label: '신혼부부', value: '신혼부부'},
         {label: '청년부', value: '청년부'},
         {label: '고등부', value: '고등부'},
@@ -51,9 +51,11 @@ const UserAddModal = ({ visible, onCancel }) => {
         Modal.confirm({
             title: '등록 확인',
             content: '등록하시겠습니까?',
+            okText: '확인',
+            cancelText: '취소',
             onOk: () => {
                 console.log(values);
-                message.success('정상적으로 등록되었습니다')
+                message.success('정상적으로 등록되었습니다');
                 handleCancel();
             },
         });
@@ -61,7 +63,8 @@ const UserAddModal = ({ visible, onCancel }) => {
 
     return (
         <Modal
-            title='사용자 등록'
+            wrapClassName='user-add-modal-wrap'
+            title='출석 명단 등록'
             visible={visible}
             onOk={handleSave}
             onCancel={handleCancel}
@@ -75,19 +78,19 @@ const UserAddModal = ({ visible, onCancel }) => {
                 initialValues={initialValues}
                 onFinish={onFinish}
                 labelCol={{ span: 4 }}>
-                <Form.Item label='성명' required>
+                <Form.Item label='이름' required className='form-item-wrap'>
                     <Form.Item
                         name='name'
                         rules={[
                             {
                                 required: true,
-                                message: '성명을 입력해주세요',
+                                message: '이름을 입력해주세요',
                             },
                         ]}>
-                        <Input placeholder='성명을 입력해주세요' />
+                        <Input placeholder='이름을 입력해주세요' />
                     </Form.Item>
                 </Form.Item>
-                <Form.Item label='생년월일' required>
+                <Form.Item label='생년월일' required className='form-item-wrap'>
                     <Form.Item
                         name='birth'
                         rules={[
@@ -99,7 +102,7 @@ const UserAddModal = ({ visible, onCancel }) => {
                         <Input placeholder='생년월일을 입력해주세요' />
                     </Form.Item>
                 </Form.Item>
-                <Form.Item label='소속' required>
+                <Form.Item label='소속' required className='form-item-wrap'>
                     <Form.Item
                         name='dept'
                         rules={[

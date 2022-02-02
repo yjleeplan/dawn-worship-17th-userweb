@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 @import 'antd/dist/antd.css';
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 html, body, #root {
 	font-family:'Noto Sans CJK KR', Noto Sans KR, sans-serif !important;
@@ -49,8 +51,16 @@ html, body, #root {
 	display: flex;
     flex: auto;
 	flex-direction: column;
-	background-image: url(/src/assets/images/background.jpg);
+	/* background-image: url(/src/assets/images/background.jpg); */
+	background-image: url(/src/assets/images/happysun_190218__030.jpg);
 	background-repeat: no-repeat;
+	background-position: center;
+    background-size: cover;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    position: fixed;
 }
 #main-layout #header {
 	width: 90%;
@@ -73,7 +83,7 @@ html, body, #root {
 	flex: auto;
 }
 #main-layout #content .search-wrap {
-	margin-top: 25%;
+	margin-top: 27%;
 }
 #main-layout #content .search-wrap .ant-input-affix-wrapper {
 	height: 45px;
@@ -82,5 +92,21 @@ html, body, #root {
 #main-layout #content .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
 	color: #4285f4;
 	font-size: 22px;
+}
+#main-layout #content .grid-wrap {
+	margin-top: 40%;
+}
+.ag-theme-alpine .ag-root-wrapper {
+	border: none;
+}
+.ag-header-cell-label {
+	justify-content: center;
+}
+.ag-theme-alpine .ag-ltr .ag-cell {
+	font-size: 12px;
+	line-height: 2.8em;
+}
+.user-add-modal-wrap .form-item-wrap {
+	margin-bottom: 10px;
 }
 /* Main Layout */
