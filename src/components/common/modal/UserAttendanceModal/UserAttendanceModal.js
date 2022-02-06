@@ -14,6 +14,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
     /** Effect */
     useEffect(() => {
         !_.isEmpty(userInfo) && handleSelectUser();
+        // eslint-disable-next-line
     }, [userInfo]);
 
     // 사용자 상세정보 조회
@@ -79,7 +80,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
                                 return (
                                     <Col span={4} className='stamp-col' key={index}>
                                         <Stamp
-                                            data={item[`day${index + 1}`]}
+                                            data={item[`day${Number(index) + 1}`]}
                                             index={index}
                                             attendanceId={userDetail.attendance.id}
                                             onSelectUser={handleSelectUser}
