@@ -1,5 +1,5 @@
+import { Form, Input, message, Modal, Select } from 'antd';
 import React from 'react';
-import { Modal, Form, Input, Select, message } from 'antd';
 
 const UserAddModal = ({ visible, onCancel }) => {
     // Form Init
@@ -23,6 +23,7 @@ const UserAddModal = ({ visible, onCancel }) => {
         {label: '사랑3', value: '사랑3'},
         {label: '사랑4', value: '사랑4'},
         {label: '신혼부부', value: '신혼부부'},
+        {label: '에하드', value: '에하드'},
         {label: '청년부', value: '청년부'},
         {label: '고등부', value: '고등부'},
         {label: '중등부', value: '중등부'},
