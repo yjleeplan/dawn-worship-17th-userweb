@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import { UserAddOutlined } from '@ant-design/icons';
+import { Col, Image, Row } from 'antd';
+import React, { useState } from 'react';
 import logo from '../../../assets/images/logo.png';
-import { Row, Col, Image } from 'antd';
 import UserAddModal from '../../common/modal/UserAddModal/UserAddModal';
 
 const Header = () => {
@@ -22,7 +22,7 @@ const Header = () => {
       	<div id='header'>
 			<Row>
 				<Col span={20}>
-					<Image width={102} height={25} src={logo} />
+					<Image width={102} height={25} src={logo} preview={false} />
 				</Col>
 				<Col span={4} className='header-right'>
 					<span className='user-add-button'>
