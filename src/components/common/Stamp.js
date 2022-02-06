@@ -11,7 +11,7 @@ import complete from '../../assets/images/btn_complete.png';
 import soon from '../../assets/images/btn_soon.png';
 
 const Stamp = ({ data, index, attendanceId, onSelectUser }) => {
-    const [disabled, setDisabled] = useState(true);
+    const [disabled, setDisabled] = useState(false);
 
     const getStamp = () => {
         const today = new Date();
