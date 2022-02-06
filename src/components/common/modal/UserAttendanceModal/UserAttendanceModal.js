@@ -1,14 +1,32 @@
-import { Col, Divider, Image, Modal, Row, Typography } from 'antd';
-import React from 'react';
-import btn5 from '../../../../assets/images/btn_5.png';
-import complete from '../../../../assets/images/btn_complete.png';
-import soon from '../../../../assets/images/btn_soon.png';
+import { Col, Divider, Image, message, Modal, Row, Typography } from 'antd';
+import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import * as api from '../../../../api';
 import title from '../../../../assets/images/title.png';
+import Stamp from '../../Stamp';
 
 const { Text } = Typography;
 
 const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
-    /** Hook */
+    /** State */
+    const [userDetail, setUserDetail] = useState([]);
+
+    /** Effect */
+    useEffect(() => {
+        !_.isEmpty(userInfo) && handleSelectUser();
+    }, [userInfo]);
+
+    // 사용자 상세정보 조회
+    const handleSelectUser = async () => {
+        try {
+            const { data: user } = await api.selectUser({
+                path: { user_id: userInfo.id },
+            });
+            setUserDetail(user);
+        } catch (error) {
+            message.error(error.response ? `${error.response.data.code}, ${error.response.data.message}` : "사용자 조회 실패");
+        }
+    }
     
     // 닫기
     const handleCancel = () => {
@@ -31,87 +49,47 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
             </Row>
             <Row className='user-attendance-modal-info'>
                 <Col span={24}>
-                    <Text className='user-name'>{userInfo.name}</Text> <Text>성도님의 출석판입니다.</Text>
+                    <Text className='user-name'>{userDetail.name}</Text> <Text>성도님의 출석판입니다.</Text>
                 </Col>
             </Row>
             <Row className='user-attendance-modal-attendance'>
                 <Col span={24}>
                     <Row>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={complete} preview={false} />
-                                1일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={complete} preview={false} />
-                                2일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={complete} preview={false} />
-                                3일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={complete} preview={false} />
-                                4일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={btn5} preview={false} />
-                                5일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                6일차
-                            </div>
-                        </Col>
+                        {!_.isEmpty(userDetail) && _.map(userDetail.attendance.daylist, (item, index) => {
+                            if (index < 6) {
+                                return (
+                                    <Col span={4} className='stamp-col' key={index}>
+                                        <Stamp
+                                            data={item[`day${Number(index) + 1}`]}
+                                            index={index}
+                                            attendanceId={userDetail.attendance.id}
+                                            onSelectUser={handleSelectUser}
+                                        />
+                                    </Col>
+                                );
+                            } else {
+                                return "";
+                            }
+                        })}
                     </Row>
                     <Divider />
                     <Row>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                7일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                8일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                9일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                10일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                11일차
-                            </div>
-                        </Col>
-                        <Col span={4} className='stamp-col'>
-                            <div>
-                                <Image src={soon} preview={false} />
-                                12일차
-                            </div>
-                        </Col>
+                        {!_.isEmpty(userDetail) && _.map(userDetail.attendance.daylist, (item, index) => {
+                            if (index > 5) {
+                                return (
+                                    <Col span={4} className='stamp-col' key={index}>
+                                        <Stamp
+                                            data={item[`day${index + 1}`]}
+                                            index={index}
+                                            attendanceId={userDetail.attendance.id}
+                                            onSelectUser={handleSelectUser}
+                                        />
+                                    </Col>
+                                );
+                            } else {
+                                return "";
+                            }
+                        })}
                     </Row>
                 </Col>
             </Row>

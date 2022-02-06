@@ -13,18 +13,6 @@ const Main = ({history}) => {
         keyword : ""
     };
 
-    // Sample Data
-    const sampleData = [
-        { name : '박상록', birth: '1994-06-15', dept: '믿음1' },
-        { name : '박상록', birth: '2000-01-22', dept: '청년부' },
-        { name : '박도영', birth: '1973-08-03', dept: '소망2' },
-        { name : '박성훈', birth: '1949-11-09', dept: '사랑4' },
-        { name : '김민영', birth: '1960-03-11', dept: '에하드' },
-        { name : '이양재', birth: '2003-12-23', dept: '사랑1' },
-        { name : '심영보', birth: '1992-05-17', dept: '믿음3' },
-        { name : '심도겸', birth: '2010-09-30', dept: '초등부' },
-    ];
-
     // 검색결과 그리드 컬럼 정의
     const columnDefs = [
         {
