@@ -1,8 +1,9 @@
 import { SearchOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
-import { Col, Form, Image, Input, Row } from 'antd';
+import { Col, Form, Image, Input, Modal, Row } from 'antd';
 import _ from 'lodash';
 import React, { useState } from 'react';
+import * as api from '../../../api';
 import title from '../../../assets/images/title.png';
 import UserAttendanceModal from '../../common/modal/UserAttendanceModal/UserAttendanceModal';
 
@@ -34,13 +35,13 @@ const Main = ({history}) => {
         },
         { 
             headerName : '생년월일',
-            field: 'birth',
+            field: 'birthday',
             width: 120,
             cellStyle: { textAlign: 'center' }
         },
         {
             headerName : '소속',
-            field: 'dept',
+            field: 'department',
             width: 90,
             cellStyle: { textAlign: 'center' }
         },
@@ -78,8 +79,21 @@ const Main = ({history}) => {
     };
 
     // Form Submit
-    const onFinish = (values) => {
-        setResultList(sampleData);
+    const onFinish = async ({ keyword }) => {
+        try {
+            const { data: users } = await api.listUser({
+                query: {
+                    ...keyword && { name: keyword },
+                },
+            });
+            setResultList(users);
+        } catch (error) {
+            Modal.error({
+                title: '검색 실패',
+                content: error.response ? `${error.response.data.code}, ${error.response.data.message}` : error.message,
+                okText: '확인',
+            });
+        }
     };
 
     // 사용자 출석체크 모달 오픈

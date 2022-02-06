@@ -6,32 +6,22 @@ const request = axios.create({
   timeout: 30000,
 });
 
-const headers = (header) => {
-  return {
-    headers: {
-      Authorization: `Bearer ${process.env.REACT_APP_BACKEND_API_KEY}`,
-      ...header && header,
-    }
-  };
-};
+export const createUser = ({data}) => {
+  return request.post('/users', data);
+}
 
-const querystring = (query) => {
-  return {
+export const listUser = ({query}) => {
+  return request.get('/users', {
     params: query,
-  };
-};
-
-export const listBooking = ({rsvnNo: reservationNo}) => {
-  return request.get(`/ays/v1/${systemId}/reservation/${bsnsCode}/${propertyNo}`, {
-    ...headers(),
-    ...querystring({
-      reservationNo,
-    }),
   });
 };
 
-export const selectCheckedInBooking = ({folioNo}) => {
-  return request.get(`/ays/v1/${systemId}/inhouse/${bsnsCode}/${propertyNo}/${folioNo}`, {
-    ...headers(),
-  });
+export const selectUser = ({path}) => {
+  return request.get(`/users/${path.user_id}`);
 };
+
+export const updatedAttendance = ({path, data}) => {
+  return request.put(`/attendance/${path.attendance_id}`,
+    data,
+  );
+}
