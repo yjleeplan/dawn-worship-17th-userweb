@@ -1,12 +1,15 @@
 import { Form, Input, message, Modal, Select } from 'antd';
 import React from 'react';
+import * as api from '../../../../api';
 
 const UserAddModal = ({ visible, onCancel }) => {
     // Form Init
     const initialValues = {
-        name : '',
-        birth: '',
-        dept: null,
+        name: '',
+        year: '',
+        month: '',
+        day: '',
+        department: null,
     };
 
     // 소속 리스트
@@ -49,14 +52,28 @@ const UserAddModal = ({ visible, onCancel }) => {
 
     // Form Submit
     const onFinish = (values) => {
+        const params = {
+            name : values.name,
+            birthday : `${values.year}-${values.month}-${values.day}`,
+            department : values.department
+        }
+        
         Modal.confirm({
             title: '등록 확인',
             content: '등록하시겠습니까?',
             okText: '확인',
             cancelText: '취소',
-            onOk: () => {
-                message.success('정상적으로 등록되었습니다');
-                handleCancel();
+            onOk: async () => {
+                try {
+                    await api.createUser({
+                        data: params,
+                    });
+
+                    message.success('정상적으로 등록되었습니다');
+                    handleCancel();
+                } catch (error) {
+                    message.error(error.response ? `${error.response.data.code}, ${error.response.data.message}` : "등록 실패");
+                }
             },
         });
     };
@@ -91,20 +108,45 @@ const UserAddModal = ({ visible, onCancel }) => {
                     </Form.Item>
                 </Form.Item>
                 <Form.Item label='생년월일' required className='form-item-wrap'>
-                    <Form.Item
-                        name='birth'
-                        rules={[
-                            {
-                                required: true,
-                                message: '생년월일을 선택해주세요',
-                              },
-                        ]}>
-                        <Input placeholder='생년월일을 입력해주세요' />
-                    </Form.Item>
+                    <Input.Group compact>
+                        <Form.Item
+                            name='year'
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '년도를 입력해주세요',
+                                },
+                            ]}>
+                            <Input style={{ width: "40%", textAlign: 'center' }} placeholder="YYYY" suffix="년" />
+                        </Form.Item>
+                        <Form.Item
+                            name='month'
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '월을 입력해주세요',
+                                },
+                            ]}>
+                            <Input style={{ width: "30%", textAlign: 'center' }} placeholder="MM" suffix="월" />
+                        </Form.Item>
+                        <Form.Item
+                            name='day'
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '일을 입력해주세요',
+                                },
+                            ]}>
+                            <Input style={{ width: "30%", textAlign: 'center' }} placeholder="DD" suffix="일" />
+                        </Form.Item>
+                    </Input.Group>
                 </Form.Item>
                 <Form.Item label='소속' required className='form-item-wrap'>
                     <Form.Item
-                        name='dept'
+                        name='department'
                         rules={[
                             {
                                 required: true,
