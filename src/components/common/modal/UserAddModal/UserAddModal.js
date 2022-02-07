@@ -130,6 +130,7 @@ const UserAddModal = ({ visible, onCancel, setIsLoading }) => {
                 labelCol={{ span: 4 }}>
                 <Form.Item label='이름' required className='form-item-wrap'>
                     <Form.Item
+                        className='form-item-inner-wrap'
                         name='name'
                         rules={[
                             {

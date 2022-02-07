@@ -116,6 +116,11 @@ html, body, #root {
 #main-layout #content .grid-wrap .ag-theme-alpine {
 	border-radius: 10px;
 	box-shadow: 0 2px 15px rgb(0 0 0 / 30%);
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+ 	-moz-backface-visibility: hidden;
+ 	-webkit-transform: translate3d(0, 0, 0);
+ 	-moz-transform: translate3d(0, 0, 0);
 }
 .ag-theme-alpine .ag-root-wrapper {
 	border: none;
@@ -145,6 +150,9 @@ html, body, #root {
 	}
 }
 .user-add-modal-wrap .form-item-wrap {
+	margin-bottom: 10px;
+}
+.user-add-modal-wrap .form-item-inner-wrap {
 	margin-bottom: 10px;
 }
 .user-add-modal-wrap .ant-input-suffix {
