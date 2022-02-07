@@ -139,14 +139,15 @@ const Main = ({history, setIsLoading}) => {
                         </div>
                     }
                 </div>
+                <div id='userAttendanceModal'>
+                    <UserAttendanceModal
+                        visible={userAttendanceModalVisible}
+                        onCancel={handleUserAttendanceModalClose}
+                        userInfo={selectedRowData}
+                        setIsLoading={setIsLoading}
+                    />
+                </div>
             </Form>
-
-            <UserAttendanceModal
-                visible={userAttendanceModalVisible}
-                onCancel={handleUserAttendanceModalClose}
-                userInfo={selectedRowData}
-                setIsLoading={setIsLoading}
-            />
         </>
     );
 };
