@@ -1,4 +1,5 @@
 import { Form, Input, message, Modal, Select } from 'antd';
+import _ from 'lodash';
 import React from 'react';
 import * as api from '../../../../api';
 
@@ -48,6 +49,30 @@ const UserAddModal = ({ visible, onCancel }) => {
     // 등록
     const handleSave = () => {
         form.submit();
+    };
+
+    // 년도 validate
+    const validateYear = (obj, value) => {
+        const regex = /^[0-9]+$/;
+        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
+        if (_.isEmpty(value)) return Promise.reject(new Error('년도를 입력해주세요.'));
+        if (value < 1900 || value > 2022) return Promise.reject(new Error('년도는 1900~2022까지 입력 가능합니다.'));
+    };
+
+    // 월 validate
+    const validateMonth = (obj, value) => {
+        const regex = /^[0-9]+$/;
+        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
+        if (_.isEmpty(value)) return Promise.reject(new Error('월을 입력해주세요.'));
+        if (parseInt(value) < 0 || parseInt(value) > 12) return Promise.reject(new Error('월은 0~12까지 입력 가능합니다.'));
+    };
+
+    // 일 validate
+    const validateDay = (obj, value) => {
+        const regex = /^[0-9]+$/;
+        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
+        if (_.isEmpty(value)) return Promise.reject(new Error('일을 입력해주세요.'));
+        if (parseInt(value) < 0 || parseInt(value) > 31) return Promise.reject(new Error('일은 0~31까지 입력 가능합니다.'));
     };
 
     // Form Submit
@@ -115,10 +140,10 @@ const UserAddModal = ({ visible, onCancel }) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: '년도를 입력해주세요',
+                                    validator: validateYear,
                                 },
                             ]}>
-                            <Input style={{ width: "40%", textAlign: 'center' }} placeholder="YYYY" suffix="년" />
+                            <Input type='tel' maxLength={4} style={{ width: "40%", textAlign: 'center' }} placeholder="YYYY" suffix="년" />
                         </Form.Item>
                         <Form.Item
                             name='month'
@@ -126,10 +151,10 @@ const UserAddModal = ({ visible, onCancel }) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: '월을 입력해주세요',
+                                    validator: validateMonth,
                                 },
                             ]}>
-                            <Input style={{ width: "30%", textAlign: 'center' }} placeholder="MM" suffix="월" />
+                            <Input type='tel' maxLength={2} style={{ width: "30%", textAlign: 'center' }} placeholder="MM" suffix="월" />
                         </Form.Item>
                         <Form.Item
                             name='day'
@@ -137,10 +162,10 @@ const UserAddModal = ({ visible, onCancel }) => {
                             rules={[
                                 {
                                     required: true,
-                                    message: '일을 입력해주세요',
+                                    validator: validateDay,
                                 },
                             ]}>
-                            <Input style={{ width: "30%", textAlign: 'center' }} placeholder="DD" suffix="일" />
+                            <Input type='tel' maxLength={2} style={{ width: "30%", textAlign: 'center' }} placeholder="DD" suffix="일" />
                         </Form.Item>
                     </Input.Group>
                 </Form.Item>
