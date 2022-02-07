@@ -207,3 +207,40 @@ html, body, #root {
 	font-weight: bold;
 }
 /* UserAttendanceModal */
+
+/* complete 스탬프 애니메이션 */
+.user-attendance-modal-attendance .btnEffect {
+	border-radius: 100% !important;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+ 	-moz-backface-visibility: hidden;
+ 	-webkit-transform: translate3d(0, 0, 0);
+ 	-moz-transform: translate3d(0, 0, 0);
+}
+.user-attendance-modal-attendance .btnEffect:hover {
+	text-decoration: none;
+}
+.user-attendance-modal-attendance .btnEffect:before {
+	position: absolute;
+	content: '';
+	display: inline-block;
+	top: -180px;
+	left: 0;
+	width: 30px;
+	height: 100%;
+	background-color: #fff;
+	animation: shiny-btn1 2.5s ease-in-out infinite;
+}
+.user-attendance-modal-attendance .btnEffect .ant-image-img {
+	border-radius: 100% !important;
+}
+
+@-webkit-keyframes shiny-btn1 {
+	0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+	80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+	81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+	100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+/* complete 스탬프 애니메이션 */
