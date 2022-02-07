@@ -30,7 +30,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
         } finally {
             setIsLoading(false);
         }
-    }
+    };
     
     // 닫기
     const handleCancel = () => {
@@ -65,9 +65,10 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                                 return (
                                     <Col span={4} className='stamp-col' key={index}>
                                         <Stamp
-                                            data={item[`day${Number(index) + 1}`]}
                                             index={index}
+                                            attendanceYn={item[`day${Number(index) + 1}`]}
                                             attendanceId={userDetail.attendance.id}
+                                            attendanceAble={item[`day${Number(index) + 1}`] === "N"}
                                             onSelectUser={handleSelectUser}
                                             setIsLoading={setIsLoading}
                                         />
@@ -85,9 +86,10 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                                 return (
                                     <Col span={4} className='stamp-col' key={index}>
                                         <Stamp
-                                            data={item[`day${Number(index) + 1}`]}
                                             index={index}
+                                            attendanceYn={item[`day${Number(index) + 1}`]}
                                             attendanceId={userDetail.attendance.id}
+                                            attendanceAble={false}
                                             onSelectUser={handleSelectUser}
                                             setIsLoading={setIsLoading}
                                         />
