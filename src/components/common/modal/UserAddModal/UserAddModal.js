@@ -15,6 +15,7 @@ const UserAddModal = ({ visible, onCancel, setIsLoading }) => {
 
     // 소속 리스트
     const deptOptions = [
+        {label: '교역자', value: '교역자'},
         {label: '믿음1', value: '믿음1'},
         {label: '믿음2', value: '믿음2'},
         {label: '믿음3', value: '믿음3'},
