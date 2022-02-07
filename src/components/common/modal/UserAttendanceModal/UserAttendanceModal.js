@@ -45,6 +45,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
             onCancel={handleCancel}
             footer={false}
             maskClosable={false}
+            getContainer={document.getElementById('userAttendanceModal')}
             destroyOnClose>
             <Row className='user-attendance-modal-title'>
                 <Col span={24}>

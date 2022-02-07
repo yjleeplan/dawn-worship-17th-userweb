@@ -119,6 +119,7 @@ const UserAddModal = ({ visible, onCancel, setIsLoading }) => {
             onCancel={handleCancel}
             okText='등록'
             cancelText='닫기'
+            getContainer={document.getElementById('userAddModal')}
             maskClosable={false}
             destroyOnClose>
         	 <Form

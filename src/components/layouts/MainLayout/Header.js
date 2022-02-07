@@ -30,8 +30,13 @@ const Header = ({ setIsLoading }) => {
 					</span>
 				</Col>
 			</Row>
-
-			<UserAddModal visible={userAddModalVisible} onCancel={handleUserAddModalClose} setIsLoading={setIsLoading} />
+			<div id='userAddModal'>
+				<UserAddModal
+					visible={userAddModalVisible}
+					onCancel={handleUserAddModalClose}
+					setIsLoading={setIsLoading}
+				/>
+			</div>
       	</div>
 	);
 };
