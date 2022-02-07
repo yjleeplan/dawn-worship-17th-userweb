@@ -11,22 +11,22 @@ import complete from '../../assets/images/btn_complete.png';
 import soon from '../../assets/images/btn_soon.png';
 
 const Stamp = ({ index, attendanceYn, attendanceId, attendanceAble, onSelectUser, setIsLoading }) => {
-    const todayFormatter = (today) => {
-        return {
-            14: 'day1',
-            15: 'day2',
-            16: 'day3',
-            17: 'day4',
-            18: 'day5',
-            19: 'day6',
-            21: 'day7',
-            22: 'day8',
-            23: 'day9',
-            24: 'day10',
-            25: 'day11',
-            26: 'day12',
-        }[today];
-    };
+    // const todayFormatter = (today) => {
+    //     return {
+    //         14: 'day1',
+    //         15: 'day2',
+    //         16: 'day3',
+    //         17: 'day4',
+    //         18: 'day5',
+    //         19: 'day6',
+    //         21: 'day7',
+    //         22: 'day8',
+    //         23: 'day9',
+    //         24: 'day10',
+    //         25: 'day11',
+    //         26: 'day12',
+    //     }[today];
+    // };
 
     const getStamp = () => {
         switch(index) {
