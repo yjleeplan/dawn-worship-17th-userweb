@@ -48,6 +48,13 @@ html, body, #root {
 /* Sample Layout */
 
 /* Main Layout */
+.ant-spin-nested-loading {
+	height: 100%;
+}
+.ant-spin-nested-loading > div > .ant-spin .ant-spin-text {
+	font-size: 20px;
+    text-shadow: unset;
+}
 #main-layout {
 	height: 100%;
 	box-sizing: border-box;
@@ -116,6 +123,14 @@ html, body, #root {
 }
 .ag-header-cell-label {
 	justify-content: center;
+}
+.grid-empty-wrap {
+	background-color: #FFF;
+	height: 60px;
+	text-align: center;
+	padding: 20px 0;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 .ag-theme-alpine .ag-ltr .ag-cell {
 	font-size: 12px;

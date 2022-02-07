@@ -1,13 +1,13 @@
 import { SearchOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
-import { Col, Form, Image, Input, Modal, Row } from 'antd';
+import { Col, Form, Image, Input, message, Modal, Row } from 'antd';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import * as api from '../../../api';
 import title from '../../../assets/images/title.png';
 import UserAttendanceModal from '../../common/modal/UserAttendanceModal/UserAttendanceModal';
 
-const Main = ({history}) => {
+const Main = ({history, setIsLoading}) => {
     // Form Init
     const initialValues = {
         keyword : ""
@@ -69,18 +69,33 @@ const Main = ({history}) => {
     // Form Submit
     const onFinish = async ({ keyword }) => {
         try {
+            setIsLoading(true);
+
             const { data: users } = await api.listUser({
                 query: {
                     ...keyword && { name: keyword },
                 },
             });
-            setResultList(users);
+
+            if (_.isEmpty(users)) {
+                message.warning({
+                    content: '검색결과 없습니다. 등록 먼저 부탁드립니다.',
+                    style: {
+                      marginTop: '280px',
+                    }
+                });
+                setResultList([]);
+            } else {
+                setResultList(users);
+            }
         } catch (error) {
             Modal.error({
                 title: '검색 실패',
                 content: error.response ? `${error.response.data.code}, ${error.response.data.message}` : error.message,
                 okText: '확인',
             });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -130,6 +145,7 @@ const Main = ({history}) => {
                 visible={userAttendanceModalVisible}
                 onCancel={handleUserAttendanceModalClose}
                 userInfo={selectedRowData}
+                setIsLoading={setIsLoading}
             />
         </>
     );

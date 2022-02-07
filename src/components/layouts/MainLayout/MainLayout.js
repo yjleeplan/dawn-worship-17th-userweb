@@ -1,13 +1,18 @@
-import React from 'react';
-import Header from './Header';
+import { Spin } from 'antd';
+import React, { useState } from 'react';
 import Content from './Content';
+import Header from './Header';
 
 const MainLayout = ({children}) => {
+	const [isLoading, setIsLoading] = useState(false);
+
     return (
-		<div id='main-layout'>
-        	<Header/>
-        	<Content>{children}</Content>
-      	</div>
+		<Spin spinning={isLoading} tip='잠시만 기다려주세요..'>
+			<div id='main-layout'>
+				<Header setIsLoading={setIsLoading} />
+				<Content>{React.cloneElement(children, {setIsLoading})}</Content>
+			</div>
+		</Spin>
     );
 };
 

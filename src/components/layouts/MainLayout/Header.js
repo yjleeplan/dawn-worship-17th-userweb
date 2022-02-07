@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import logo from '../../../assets/images/logo.png';
 import UserAddModal from '../../common/modal/UserAddModal/UserAddModal';
 
-const Header = () => {
+const Header = ({ setIsLoading }) => {
 	/** State */
 	const [userAddModalVisible, setUserAddModalVisible] = useState(false);
 
@@ -31,7 +31,7 @@ const Header = () => {
 				</Col>
 			</Row>
 
-			<UserAddModal visible={userAddModalVisible} onCancel={handleUserAddModalClose}/>
+			<UserAddModal visible={userAddModalVisible} onCancel={handleUserAddModalClose} setIsLoading={setIsLoading} />
       	</div>
 	);
 };

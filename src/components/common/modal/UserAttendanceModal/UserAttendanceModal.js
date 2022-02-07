@@ -7,7 +7,7 @@ import Stamp from '../../Stamp';
 
 const { Text } = Typography;
 
-const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
+const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
     /** State */
     const [userDetail, setUserDetail] = useState([]);
 
@@ -20,12 +20,15 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
     // 사용자 상세정보 조회
     const handleSelectUser = async () => {
         try {
+            setIsLoading(true);
             const { data: user } = await api.selectUser({
                 path: { user_id: userInfo.id },
             });
             setUserDetail(user);
         } catch (error) {
             message.error(error.response ? `${error.response.data.code}, ${error.response.data.message}` : "사용자 조회 실패");
+        } finally {
+            setIsLoading(false);
         }
     }
     
@@ -65,6 +68,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
                                             index={index}
                                             attendanceId={userDetail.attendance.id}
                                             onSelectUser={handleSelectUser}
+                                            setIsLoading={setIsLoading}
                                         />
                                     </Col>
                                 );
@@ -84,6 +88,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo }) => {
                                             index={index}
                                             attendanceId={userDetail.attendance.id}
                                             onSelectUser={handleSelectUser}
+                                            setIsLoading={setIsLoading}
                                         />
                                     </Col>
                                 );
