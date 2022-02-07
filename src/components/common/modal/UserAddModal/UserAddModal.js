@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React from 'react';
 import * as api from '../../../../api';
 
-const UserAddModal = ({ visible, onCancel }) => {
+const UserAddModal = ({ visible, onCancel, setIsLoading }) => {
     // Form Init
     const initialValues = {
         name: '',
@@ -54,25 +54,28 @@ const UserAddModal = ({ visible, onCancel }) => {
     // 년도 validate
     const validateYear = (obj, value) => {
         const regex = /^[0-9]+$/;
-        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
         if (_.isEmpty(value)) return Promise.reject(new Error('년도를 입력해주세요.'));
+        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
         if (value < 1900 || value > 2022) return Promise.reject(new Error('년도는 1900~2022까지 입력 가능합니다.'));
+        return Promise.resolve();
     };
 
     // 월 validate
     const validateMonth = (obj, value) => {
         const regex = /^[0-9]+$/;
-        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
         if (_.isEmpty(value)) return Promise.reject(new Error('월을 입력해주세요.'));
-        if (parseInt(value) < 0 || parseInt(value) > 12) return Promise.reject(new Error('월은 0~12까지 입력 가능합니다.'));
+        if (!regex.test(value)) return Promise.reject(new Error('월은 숫자만 입력 가능합니다.'));
+        if (value < 0 || value > 12) return Promise.reject(new Error('월은 0~12까지 입력 가능합니다.'));
+        return Promise.resolve();
     };
 
     // 일 validate
     const validateDay = (obj, value) => {
         const regex = /^[0-9]+$/;
-        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
         if (_.isEmpty(value)) return Promise.reject(new Error('일을 입력해주세요.'));
-        if (parseInt(value) < 0 || parseInt(value) > 31) return Promise.reject(new Error('일은 0~31까지 입력 가능합니다.'));
+        if (!regex.test(value)) return Promise.reject(new Error('일은 숫자만 입력 가능합니다.'));
+        if ( value < 0 ||  value > 31) return Promise.reject(new Error('일은 0~31까지 입력 가능합니다.'));
+        return Promise.resolve();
     };
 
     // Form Submit
@@ -90,6 +93,7 @@ const UserAddModal = ({ visible, onCancel }) => {
             cancelText: '취소',
             onOk: async () => {
                 try {
+                    setIsLoading(true);
                     await api.createUser({
                         data: params,
                     });
@@ -98,6 +102,8 @@ const UserAddModal = ({ visible, onCancel }) => {
                     handleCancel();
                 } catch (error) {
                     message.error(error.response ? `${error.response.data.code}, ${error.response.data.message}` : "등록 실패");
+                } finally {
+                    setIsLoading(false)
                 }
             },
         });
@@ -142,7 +148,8 @@ const UserAddModal = ({ visible, onCancel }) => {
                                     required: true,
                                     validator: validateYear,
                                 },
-                            ]}>
+                            ]}
+                            >
                             <Input type='tel' maxLength={4} style={{ width: "40%", textAlign: 'center' }} placeholder="YYYY" suffix="년" />
                         </Form.Item>
                         <Form.Item
@@ -153,7 +160,8 @@ const UserAddModal = ({ visible, onCancel }) => {
                                     required: true,
                                     validator: validateMonth,
                                 },
-                            ]}>
+                            ]}
+                            >
                             <Input type='tel' maxLength={2} style={{ width: "30%", textAlign: 'center' }} placeholder="MM" suffix="월" />
                         </Form.Item>
                         <Form.Item
@@ -164,7 +172,8 @@ const UserAddModal = ({ visible, onCancel }) => {
                                     required: true,
                                     validator: validateDay,
                                 },
-                            ]}>
+                            ]}
+                            >
                             <Input type='tel' maxLength={2} style={{ width: "30%", textAlign: 'center' }} placeholder="DD" suffix="일" />
                         </Form.Item>
                     </Input.Group>

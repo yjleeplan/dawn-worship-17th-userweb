@@ -10,7 +10,7 @@ import btn6 from '../../assets/images/btn_6.png';
 import complete from '../../assets/images/btn_complete.png';
 import soon from '../../assets/images/btn_soon.png';
 
-const Stamp = ({ data, index, attendanceId, onSelectUser }) => {
+const Stamp = ({ data, index, attendanceId, onSelectUser, setIsLoading }) => {
     const [disabled, setDisabled] = useState(false);
 
     const getStamp = () => {
@@ -75,6 +75,7 @@ const Stamp = ({ data, index, attendanceId, onSelectUser }) => {
     const handleUpdatedAttendance = async () => {
         if (!disabled) {
             try {
+                setIsLoading(true);
                 await api.updatedAttendance({
                     path: { attendance_id: attendanceId },
                     data: { [`day${Number(index) + 1}`]: "Y" }
@@ -82,6 +83,8 @@ const Stamp = ({ data, index, attendanceId, onSelectUser }) => {
                 onSelectUser();
             } catch (error) {
                 message.error(error.response ? `${error.response.data.code}, ${error.response.data.message}` : "출석 실패");
+            } finally {
+                setIsLoading(false)
             }
         }
     };
