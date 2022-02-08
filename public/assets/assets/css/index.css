@@ -306,8 +306,8 @@ body,
   display: none;
 }
 .ant-list.ant-list-split .ant-spin-nested-loading {
-  min-height: 410px;
-  height: 410px;
+  min-height: 330px;
+  height: 330px;
   overflow-y: auto;
 }
 .commentBtn {
