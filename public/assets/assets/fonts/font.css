@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Eulyoo1945-Regular';
+    /* src: url('./Eulyoo1945-Regular.otf') format('opentype'); */
+    src: url('./Eulyoo1945-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Eulyoo1945-SemiBold';
+    /* src: url('./Eulyoo1945-Regular.otf') format('opentype'); */
+    src: url('./Eulyoo1945-SemiBold.ttf') format('truetype');
+}

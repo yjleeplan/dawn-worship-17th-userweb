@@ -1,16 +1,21 @@
+import { Form, Input, message, Modal, Select } from 'antd';
+import _ from 'lodash';
 import React from 'react';
-import { Modal, Form, Input, Select, message } from 'antd';
+import * as api from '../../../../api';
 
-const UserAddModal = ({ visible, onCancel }) => {
+const UserAddModal = ({ visible, onCancel, setIsLoading }) => {
     // Form Init
     const initialValues = {
-        name : '',
-        birth: '',
-        dept: null,
+        name: '',
+        year: '',
+        month: '',
+        day: '',
+        department: null,
     };
 
     // 소속 리스트
     const deptOptions = [
+        {label: '교역자', value: '교역자'},
         {label: '믿음1', value: '믿음1'},
         {label: '믿음2', value: '믿음2'},
         {label: '믿음3', value: '믿음3'},
@@ -23,6 +28,7 @@ const UserAddModal = ({ visible, onCancel }) => {
         {label: '사랑3', value: '사랑3'},
         {label: '사랑4', value: '사랑4'},
         {label: '신혼부부', value: '신혼부부'},
+        {label: '에하드', value: '에하드'},
         {label: '청년부', value: '청년부'},
         {label: '고등부', value: '고등부'},
         {label: '중등부', value: '중등부'},
@@ -46,16 +52,60 @@ const UserAddModal = ({ visible, onCancel }) => {
         form.submit();
     };
 
+    // 년도 validate
+    const validateYear = (obj, value) => {
+        const regex = /^[0-9]+$/;
+        if (_.isEmpty(value)) return Promise.reject(new Error('년도를 입력해주세요.'));
+        if (!regex.test(value)) return Promise.reject(new Error('년도는 숫자만 입력 가능합니다.'));
+        if (value < 1900 || value > 2022) return Promise.reject(new Error('년도는 1900~2022까지 입력 가능합니다.'));
+        return Promise.resolve();
+    };
+
+    // 월 validate
+    const validateMonth = (obj, value) => {
+        const regex = /^[0-9]+$/;
+        if (_.isEmpty(value)) return Promise.reject(new Error('월을 입력해주세요.'));
+        if (!regex.test(value)) return Promise.reject(new Error('월은 숫자만 입력 가능합니다.'));
+        if (value < 0 || value > 12) return Promise.reject(new Error('월은 0~12까지 입력 가능합니다.'));
+        return Promise.resolve();
+    };
+
+    // 일 validate
+    const validateDay = (obj, value) => {
+        const regex = /^[0-9]+$/;
+        if (_.isEmpty(value)) return Promise.reject(new Error('일을 입력해주세요.'));
+        if (!regex.test(value)) return Promise.reject(new Error('일은 숫자만 입력 가능합니다.'));
+        if ( value < 0 ||  value > 31) return Promise.reject(new Error('일은 0~31까지 입력 가능합니다.'));
+        return Promise.resolve();
+    };
+
     // Form Submit
     const onFinish = (values) => {
+        const params = {
+            name : values.name,
+            birthday : `${values.year}-${values.month}-${values.day}`,
+            department : values.department
+        }
+        
         Modal.confirm({
             title: '등록 확인',
             content: '등록하시겠습니까?',
             okText: '확인',
             cancelText: '취소',
-            onOk: () => {
-                message.success('정상적으로 등록되었습니다');
-                handleCancel();
+            onOk: async () => {
+                try {
+                    setIsLoading(true);
+                    await api.createUser({
+                        data: params,
+                    });
+
+                    message.success('정상적으로 등록되었습니다');
+                    handleCancel();
+                } catch (error) {
+                    message.error(error.response ? `${error.response.data.code}, ${error.response.data.message}` : "등록 실패");
+                } finally {
+                    setIsLoading(false)
+                }
             },
         });
     };
@@ -69,6 +119,7 @@ const UserAddModal = ({ visible, onCancel }) => {
             onCancel={handleCancel}
             okText='등록'
             cancelText='닫기'
+            getContainer={document.getElementById('userAddModal')}
             maskClosable={false}
             destroyOnClose>
         	 <Form
@@ -79,6 +130,7 @@ const UserAddModal = ({ visible, onCancel }) => {
                 labelCol={{ span: 4 }}>
                 <Form.Item label='이름' required className='form-item-wrap'>
                     <Form.Item
+                        className='form-item-inner-wrap'
                         name='name'
                         rules={[
                             {
@@ -90,20 +142,48 @@ const UserAddModal = ({ visible, onCancel }) => {
                     </Form.Item>
                 </Form.Item>
                 <Form.Item label='생년월일' required className='form-item-wrap'>
-                    <Form.Item
-                        name='birth'
-                        rules={[
-                            {
-                                required: true,
-                                message: '생년월일을 선택해주세요',
-                              },
-                        ]}>
-                        <Input placeholder='생년월일을 입력해주세요' />
-                    </Form.Item>
+                    <Input.Group compact>
+                        <Form.Item
+                            name='year'
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    validator: validateYear,
+                                },
+                            ]}
+                            >
+                            <Input type='tel' maxLength={4} style={{ width: "40%", textAlign: 'center' }} placeholder="YYYY" suffix="년" />
+                        </Form.Item>
+                        <Form.Item
+                            name='month'
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    validator: validateMonth,
+                                },
+                            ]}
+                            >
+                            <Input type='tel' maxLength={2} style={{ width: "30%", textAlign: 'center' }} placeholder="MM" suffix="월" />
+                        </Form.Item>
+                        <Form.Item
+                            name='day'
+                            noStyle
+                            rules={[
+                                {
+                                    required: true,
+                                    validator: validateDay,
+                                },
+                            ]}
+                            >
+                            <Input type='tel' maxLength={2} style={{ width: "30%", textAlign: 'center' }} placeholder="DD" suffix="일" />
+                        </Form.Item>
+                    </Input.Group>
                 </Form.Item>
                 <Form.Item label='소속' required className='form-item-wrap'>
                     <Form.Item
-                        name='dept'
+                        name='department'
                         rules={[
                             {
                                 required: true,
