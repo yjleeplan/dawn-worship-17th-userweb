@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import * as api from '../../../api';
 import title from '../../../assets/images/title.png';
 import UserAttendanceModal from '../../common/modal/UserAttendanceModal/UserAttendanceModal';
+import VideoPlayer from '../../common/VideoPlayer';
 
 const Main = ({history, setIsLoading}) => {
     // Form Init
@@ -121,6 +122,7 @@ const Main = ({history, setIsLoading}) => {
                         <Image width={192} height={160} src={title} preview={false} />
                     </Col>
                 </Row>
+                <VideoPlayer />
                 <div className='search-wrap'>
                     <Form.Item name='keyword'>
                         <Input placeholder='이름을 입력해주세요' suffix={<SearchOutlined onClick={handleSearch} />} />

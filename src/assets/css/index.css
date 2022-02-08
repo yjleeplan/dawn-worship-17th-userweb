@@ -252,3 +252,10 @@ html, body, #root {
 	100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
 }
 /* complete 스탬프 애니메이션 */
+
+/* VideoPlayer */
+.video-player-wrap {
+	width: 100% !important;
+	margin: 0 0 30px;
+}
+/* VideoPlayer */
