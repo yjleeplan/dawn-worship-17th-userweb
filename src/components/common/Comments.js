@@ -121,6 +121,7 @@ const Comments = ({ setIsLoading }) => {
         content={
           <>
             <Input
+              className="comment-user-name"
               onChange={handleUserNameChange}
               value={commentUserName}
               placeholder="이름을 입력해주세요"
@@ -137,7 +138,7 @@ const Comments = ({ setIsLoading }) => {
               onClick={handleSubmit}
               type="primary"
             >
-              등록
+              댓글 등록
             </Button>
           </>
         }

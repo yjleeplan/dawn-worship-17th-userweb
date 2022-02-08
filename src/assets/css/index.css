@@ -93,6 +93,11 @@ body,
   height: 20px;
   color: #fff;
 }
+#main-layout #header .user-add-button .anticon.anticon-check-circle svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
 #main-layout #content {
   width: 80%;
   height: 100%;
@@ -132,8 +137,13 @@ body,
   -moz-transform: translate3d(0, 0, 0);
 }
 .ag-theme-alpine .ag-root-wrapper {
-  border: none;
+  /* border: none; */
   border-radius: 10px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
 }
 .ag-header-cell-label {
   justify-content: center;
@@ -310,6 +320,9 @@ body,
   height: 330px;
   overflow-y: auto;
 }
+.comment-user-name {
+  margin-bottom: 2px;
+}
 .commentBtn {
   margin-top: 4px;
   width: 100%;
@@ -329,3 +342,32 @@ body,
   }
 }
 /* 댓글 */
+
+/* SearchAttendanceModal */
+.ant-modal-wrap.search-attendance-modal-wrap .ant-modal-body {
+  min-height: 380px;
+}
+.ant-modal-wrap.search-attendance-modal-wrap .search-wrap {
+  text-align: center;
+}
+.ant-modal-wrap.search-attendance-modal-wrap
+  .search-wrap
+  .ant-input-affix-wrapper {
+  height: 40px;
+  border-radius: 20px;
+  /* max-width: 500px; */
+  /* box-shadow: 0 2px 4px rgb(0 0 0 / 30%); */
+}
+.ant-modal-wrap.search-attendance-modal-wrap
+  .search-wrap
+  .ant-input-affix-wrapper
+  .anticon.anticon-search {
+  color: #4285f4;
+  font-size: 22px;
+}
+/* @media (max-width: 767px) {
+  .search-attendance-modal-wrap .ant-modal {
+    max-width: calc(100vw - 50px);
+  }
+} */
+/* SearchAttendanceModal */
