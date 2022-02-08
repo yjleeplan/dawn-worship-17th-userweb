@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+@import 'antd/dist/antd.css';
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+@import '../fonts/font.css';
+
+html, body, #root {
+	font-family:'Noto Sans CJK KR', Noto Sans KR, sans-serif !important;
+	font-weight: 500;
+	margin: 0;
+	height: 100%;
+}
+
+/* Sample Layout */
+#sample-layout {
+	box-sizing: border-box;
+	display: flex;
+    flex: auto;
+    flex-direction: column;
+    min-height: 0;
+}
+#sample-layout #header {
+	color: #fff;
+	background: #7dbcea;
+	height: 160px;
+    padding: 0 50px;
+	line-height: 160px;
+	flex: 0 0 auto;
+	text-align: center;
+}
+#sample-layout #content {
+	min-height: 640px;
+    color: #fff;
+    line-height: 640px;
+	background: rgba(16, 142, 233, 1);
+	flex: auto;
+	text-align: center;
+}
+#sample-layout #footer {
+	border: 1px soild #000;
+	height: 140px;
+	color: #fff;
+    line-height: 140px;
+	background: rgb(31, 16, 233);
+	flex: auto;
+	text-align: center;
+}
+/* Sample Layout */
+
+/* Main Layout */
+.ant-spin-nested-loading {
+	height: 100%;
+}
+.ant-spin-nested-loading > div > .ant-spin .ant-spin-text {
+	font-size: 20px;
+    text-shadow: unset;
+}
+#main-layout {
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+    flex: auto;
+	flex-direction: column;
+	background-image: url(/src/assets/images/background.jpg);
+	/* background-image: url(/src/assets/images/happysun_190218__030.jpg); */
+	background-repeat: no-repeat;
+	background-position: center;
+    background-size: cover;
+	/* background-color: currentColor; */
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    position: fixed;
+	overflow-y: scroll;
+}
+#main-layout #header {
+	width: 90%;
+	min-height: 6vh;
+	padding: 20px 0px;
+	margin: auto;
+}
+#main-layout #header .header-right {
+	text-align: right;
+}
+#main-layout #header .user-add-button .anticon.anticon-user-add svg {
+	width: 25px;
+	height: 25px;
+	color: #FFF;
+}
+#main-layout #content {
+	width: 80%;
+	height: 100%;
+	min-height: 94vh;
+	margin: auto;
+	flex: auto;
+}
+#main-layout #content .search-wrap {
+	/* margin-top: 27%; */
+	text-align: center;
+}
+#main-layout #content .search-wrap .ant-input-affix-wrapper {
+	height: 45px;
+	border-radius: 20px;
+	max-width: 500px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+}
+#main-layout #content .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
+	color: #4285f4;
+	font-size: 22px;
+}
+#main-layout #content .grid-wrap {
+	margin-top: 60px;
+	padding-bottom: 60px;
+}
+#main-layout #content .grid-wrap .ag-theme-alpine {
+	border-radius: 10px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 30%);
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+ 	-moz-backface-visibility: hidden;
+ 	-webkit-transform: translate3d(0, 0, 0);
+ 	-moz-transform: translate3d(0, 0, 0);
+}
+.ag-theme-alpine .ag-root-wrapper {
+	border: none;
+	border-radius: 10px;
+}
+.ag-header-cell-label {
+	justify-content: center;
+}
+.grid-empty-wrap {
+	background-color: #FFF;
+	height: 60px;
+	text-align: center;
+	padding: 20px 0;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+}
+.ag-theme-alpine .ag-ltr .ag-cell {
+	font-size: 12px;
+	line-height: 2.8em;
+}
+@media (max-width: 767px) {
+	.user-add-modal-wrap .ant-modal {
+		max-width: calc(100vw - 50px);
+	}
+	.ant-modal.ant-modal-confirm.ant-modal-confirm-confirm {
+		max-width: calc(100vw - 50px);
+	}
+}
+.user-add-modal-wrap .form-item-wrap {
+	margin-bottom: 10px;
+}
+.user-add-modal-wrap .form-item-inner-wrap {
+	margin-bottom: 10px;
+}
+.user-add-modal-wrap .ant-input-suffix {
+	color: #696969;
+}
+/* Main Layout */
+
+/* UserAttendanceModal */
+.ant-modal-wrap.user-attendance-modal-wrap .ant-modal-content{
+	background-color: unset;
+}
+.ant-modal-wrap.user-attendance-modal-wrap .ant-modal-body{
+	min-height: 500px;
+	background-image: url(/src/assets/images/attendance_bg.png);
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+.user-attendance-modal-title {
+	height: 160px;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.user-attendance-modal-info {
+	text-align: center;
+	font-size: 16px;
+	font-family: 'Eulyoo1945-SemiBold';
+	font-weight: bold;
+}
+.user-attendance-modal-info .user-name {
+	color: #6f2629;
+	font-size: 18px;
+    font-weight: bold;
+}
+.user-attendance-modal-attendance {
+	/* height: 200px; */
+	background-color: #CEBB9C;
+	border-radius: 6px;
+	padding: 10px 2px;
+}
+.user-attendance-modal-attendance .ant-divider.ant-divider-horizontal {
+	margin: 5px auto;
+    min-width: 90%;
+    width: 90%;
+}
+.user-attendance-modal-attendance .stamp-col {
+	padding: 2px;
+}
+.user-attendance-modal-attendance .stamp-col div {
+	text-align: center;
+	font-size: 11px;
+	font-family: 'Eulyoo1945-Regular';
+	font-weight: bold;
+}
+.user-attendance-modal-attendance-footer {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 13px;
+	font-family: 'Eulyoo1945-Regular';
+	font-weight: bold;
+}
+/* UserAttendanceModal */
+
+/* complete 스탬프 애니메이션 */
+.user-attendance-modal-attendance .btnEffect {
+	border-radius: 100% !important;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+ 	-moz-backface-visibility: hidden;
+ 	-webkit-transform: translate3d(0, 0, 0);
+ 	-moz-transform: translate3d(0, 0, 0);
+}
+.user-attendance-modal-attendance .btnEffect:hover {
+	text-decoration: none;
+}
+.user-attendance-modal-attendance .btnEffect:before {
+	position: absolute;
+	content: '';
+	display: inline-block;
+	top: -180px;
+	left: 0;
+	width: 30px;
+	height: 100%;
+	background-color: #fff;
+	animation: shiny-btn1 2.5s ease-in-out infinite;
+}
+.user-attendance-modal-attendance .btnEffect .ant-image-img {
+	border-radius: 100% !important;
+}
+
+@-webkit-keyframes shiny-btn1 {
+	0% { -webkit-transform: scale(0) rotate(45deg); opacity: 0; }
+	80% { -webkit-transform: scale(0) rotate(45deg); opacity: 0.5; }
+	81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
+	100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
+}
+/* complete 스탬프 애니메이션 */
+
+/* VideoPlayer */
+.video-player-wrap {
+	width: 100% !important;
+	margin: 0 auto 30px;
+}
+
+@media (min-width: 760px) {
+	.video-player-wrap {
+		width: 80% !important;
+		min-height: 500px;
+		margin: 0 auto 50px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.video-player-wrap {
+		width: 60% !important;
+		min-height: 600px;
+		margin: 0 auto 50px;
+	}
+}
+/* VideoPlayer */
