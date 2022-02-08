@@ -1,6 +1,6 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { AgGridReact } from "ag-grid-react";
-import { Col, Form, Image, Input, message, Modal, Row } from "antd";
+import { Button, Col, Form, Image, Input, message, Modal, Row } from "antd";
 import _ from "lodash";
 import React, { useState } from "react";
 import * as api from "../../../api";
@@ -34,6 +34,13 @@ const Main = ({ history, setIsLoading }) => {
       field: "department",
       width: 90,
       cellStyle: { textAlign: "center" },
+    },
+    {
+      headerName: "출석",
+      field: "btn",
+      width: 90,
+      cellStyle: { textAlign: "center" },
+      cellRenderer: <Button />,
     },
   ];
 
