@@ -314,4 +314,18 @@ body,
   margin-top: 4px;
   width: 100%;
 }
+
+@media (min-width: 760px) {
+  .comment-wrap {
+    width: 80% !important;
+    margin: 0 auto 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .comment-wrap {
+    width: 60% !important;
+    margin: 0 auto 50px;
+  }
+}
 /* 댓글 */
