@@ -6,7 +6,20 @@ import React, { useEffect, useState } from "react";
 import * as api from "../../api";
 
 const Comments = ({ setIsLoading }) => {
-  const colorCodeList = ["#87d068", "f56a00", "#2db7f5", "#108ee9", "#cd201f"];
+  const colorCodeList = [
+    "#08080",
+    "#ADD8E6",
+    "#90EE90",
+    "#87d068",
+    "f56a00",
+    "#2db7f5",
+    "#108ee9",
+    "#FFD700",
+    "#cd201f",
+    "#FA8072",
+    "#EE82EE",
+    "#8A2BE2",
+  ];
 
   /** State */
   const [commentUserName, setCommentUserName] = useState("");
