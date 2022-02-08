@@ -5,6 +5,7 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import * as api from '../../../api';
 import title from '../../../assets/images/title.png';
+import Comments from '../../common/Comments';
 import UserAttendanceModal from '../../common/modal/UserAttendanceModal/UserAttendanceModal';
 import VideoPlayer from '../../common/VideoPlayer';
 
@@ -123,6 +124,7 @@ const Main = ({history, setIsLoading}) => {
                     </Col>
                 </Row>
                 <VideoPlayer />
+                <Comments />
                 <div className='search-wrap'>
                     <Form.Item name='keyword'>
                         <Input placeholder='이름을 입력해주세요' suffix={<SearchOutlined onClick={handleSearch} />} />
