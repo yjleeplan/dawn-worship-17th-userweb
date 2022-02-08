@@ -109,7 +109,7 @@ const Comments = ({ setIsLoading }) => {
   };
 
   return (
-    <>
+    <div className="comment-wrap">
       <List
         dataSource={commentData.comments}
         header={`${commentData.comments.length} 댓글`}
@@ -142,7 +142,7 @@ const Comments = ({ setIsLoading }) => {
           </>
         }
       />
-    </>
+    </div>
   );
 };
 
