@@ -12,7 +12,7 @@
     "start": "react-scripts start",
     "start-dev": "npm run dev && npm-run-all -p sync-assets watch-assets start",
     "start-prod": "npm run prod && npm-run-all -p sync-assets watch-assets start",
-    "sync-assets": "cp -r ./src/assets/ ./public/assets/",
+    "sync-assets": "cp -r ./src/assets/ ./public/",
     "watch-assets": "chokidar \"src/assets\" -c \"npm run sync-assets\""
   },
   "dependencies": {
