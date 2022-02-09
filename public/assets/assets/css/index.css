@@ -285,23 +285,28 @@ body,
 /* complete 스탬프 애니메이션 */
 
 /* VideoPlayer */
-.video-player-wrap {
-  width: 100% !important;
-  margin: 0 auto 30px;
+.video-player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  margin: 0 0 30px;
+}
+
+.video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 @media (min-width: 760px) {
-  .video-player-wrap {
+  .video-player-wrapper {
     width: 80% !important;
-    min-height: 500px;
     margin: 0 auto 50px;
   }
 }
 
 @media (min-width: 1200px) {
-  .video-player-wrap {
+  .video-player-wrapper {
     width: 60% !important;
-    min-height: 600px;
     margin: 0 auto 50px;
   }
 }
