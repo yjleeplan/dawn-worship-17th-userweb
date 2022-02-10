@@ -1,4 +1,4 @@
-import { UserOutlined } from "@ant-design/icons";
+import { EditOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Comment, Input, List, message } from "antd";
 import _ from "lodash";
 import moment from "moment";
@@ -125,19 +125,22 @@ const Comments = ({ setIsLoading }) => {
               onChange={handleUserNameChange}
               value={commentUserName}
               placeholder="이름을 입력해주세요"
+              size="large"
             />
             <Input.TextArea
+              className="comment-content"
               rows={4}
               onChange={handleCommentChange}
               value={commentData.value}
               placeholder="댓글을 입력해주세요"
             />
             <Button
-              className="commentBtn"
+              className="comment-btn"
               loading={false}
               onClick={handleSubmit}
               type="primary"
             >
+              <EditOutlined />
               댓글 등록
             </Button>
           </>

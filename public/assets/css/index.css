@@ -58,7 +58,7 @@ body,
   height: 100%;
 }
 
-.ant-spin-nested-loading>div>.ant-spin .ant-spin-text {
+.ant-spin-nested-loading > div > .ant-spin .ant-spin-text {
   font-size: 20px;
   text-shadow: unset;
 }
@@ -130,7 +130,11 @@ body,
   box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 
-#main-layout #content .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
+#main-layout
+  #content
+  .search-wrap
+  .ant-input-affix-wrapper
+  .anticon.anticon-search {
   color: #4285f4;
   font-size: 22px;
 }
@@ -198,6 +202,11 @@ body,
 
 .user-add-modal-wrap .ant-input-suffix {
   color: #696969;
+}
+
+.user-add-modal-wrap .ant-modal-footer button {
+  width: 64px;
+  height: 40px;
 }
 
 /* Main Layout */
@@ -327,7 +336,7 @@ body,
 /* VideoPlayer */
 .video-player-wrapper {
   position: relative;
-  padding-top: 66.66%;
+  padding-top: 90%;
   /* Player ratio: 100 / (1280 / 720) */
   margin: 0 0 30px;
 }
@@ -374,9 +383,16 @@ body,
   margin-bottom: 2px;
 }
 
-.commentBtn {
+.comment-content {
+  font-size: 16px;
+}
+
+.comment-btn {
   margin-top: 4px;
   width: 100%;
+  margin-bottom: 50px;
+  height: 45px;
+  font-size: 16px;
 }
 
 @media (min-width: 760px) {
@@ -404,14 +420,19 @@ body,
   text-align: center;
 }
 
-.ant-modal-wrap.search-attendance-modal-wrap .search-wrap .ant-input-affix-wrapper {
+.ant-modal-wrap.search-attendance-modal-wrap
+  .search-wrap
+  .ant-input-affix-wrapper {
   height: 40px;
   border-radius: 20px;
   /* max-width: 500px; */
   /* box-shadow: 0 2px 4px rgb(0 0 0 / 30%); */
 }
 
-.ant-modal-wrap.search-attendance-modal-wrap .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
+.ant-modal-wrap.search-attendance-modal-wrap
+  .search-wrap
+  .ant-input-affix-wrapper
+  .anticon.anticon-search {
   color: #4285f4;
   font-size: 22px;
 }
