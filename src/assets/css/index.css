@@ -94,10 +94,6 @@ body,
   text-align: right;
 }
 
-.user-add-button-wrap {
-  color: #fff;
-}
-
 #main-layout #header .user-add-button .anticon.anticon-user-add svg {
   width: 20px;
   height: 20px;
@@ -113,33 +109,30 @@ body,
 .user-attendance-modal-icon {
   margin-bottom: 30px;
 }
-.youtube-filled-icon {
-  font-size: 77px;
-  width: 100%;
-  /* position: absolute; */
-  color: #fff;
-  z-index: 1;
-}
-.youtube-outlined-icon {
-  font-size: 73px;
-  width: 100%;
-  /* position: absolute; */
-  color: #fff;
-  /* padding: 2px; */
-}
-.picture-outlined-icon {
-  font-size: 73px;
-  width: 100%;
-  /* position: absolute; */
-  color: #fff;
-  /* padding: 2px; */
+.user-attendance-modal-icon .icon-wrap {
+  height: 63px;
 }
 .audit-outlined-icon {
+  font-size: 50px;
+  width: 100%;
+  color: #fff;
+  padding-top: 7px;
+}
+.user-add-outlined-icon {
+  font-size: 50px;
+  width: 100%;
+  color: #fff;
+  padding-top: 5px;
+}
+.youtube-outlined-icon {
   font-size: 63px;
   width: 100%;
-  /* position: absolute; */
   color: #fff;
-  padding-top: 4px;
+}
+.picture-outlined-icon {
+  font-size: 63px;
+  width: 100%;
+  color: #fff;
 }
 .icon-text {
   text-align: center;
@@ -401,6 +394,12 @@ body,
 /* VideoPlayer */
 
 /* 댓글 */
+.comment-wrap {
+  padding-bottom: 50px;
+}
+.comment-wrap .ant-card {
+  margin-bottom: 20px;
+}
 .ant-card-head-title {
   /* color: #696969; */
 }
@@ -408,43 +407,46 @@ body,
   padding: 0;
   border-top: 1px solid #f0f0f0;
 }
-.comment-list-wrap {
-  position: relative;
-}
 .comment-list-refresh-wrap {
   position: absolute;
   right: 0;
   top: 12px;
   font-size: 16px;
 }
-
-.ant-list.ant-list-split {
-  background-color: #fff;
-  padding: 10px;
+.comment-wrap .comment-add-wrap .ant-comment-inner {
+  padding: 0;
 }
 
+.comment-list-wrap .ant-list.ant-list-split {
+  background-color: #fff;
+}
+.comment-list-wrap .ant-list.ant-list-split .ant-list-header {
+  padding: 12px;
+}
 .ant-list-empty-text {
   display: none;
 }
 
-.ant-list.ant-list-split .ant-spin-nested-loading {
+.comment-list-wrap .ant-list.ant-list-split .ant-spin-nested-loading {
   min-height: 330px;
   height: 330px;
   overflow-y: auto;
+  padding: 12px;
 }
 
 .comment-user-name {
-  margin-bottom: 2px;
+  margin-bottom: 0;
+  margin-top: -1px;
 }
 
 .comment-content {
   font-size: 16px;
+  margin-top: -1px;
 }
 
 .comment-btn {
-  margin-top: 4px;
+  /* margin-top: 4px; */
   width: 100%;
-  margin-bottom: 50px;
   height: 45px;
   font-size: 16px;
   padding-right: 24px;
