@@ -1,11 +1,9 @@
-import {
-  CheckCircleOutlined,
-  ContactsOutlined,
-  UserAddOutlined,
-  YoutubeOutlined,
-} from "@ant-design/icons";
 import { Col, Image, Row } from "antd";
 import React, { useState } from "react";
+import iconAttendance from "../../../assets/images/icon_attendance.png";
+import iconPicture from "../../../assets/images/icon_picture.png";
+import iconUserAdd from "../../../assets/images/icon_user_add.png";
+import iconVideo from "../../../assets/images/icon_video.png";
 import title from "../../../assets/images/title.png";
 import Comments from "../../common/Comments";
 import SearchAttendanceModal from "../../common/modal/SearchAttendanceModal/SearchAttendanceModal";
@@ -37,6 +35,18 @@ const Main = ({ history, setIsLoading }) => {
     setSearchAttendanceModalVisible(false);
   };
 
+  // 영상 링크
+  const handleVideoClick = () => {
+    window.open(
+      "https://youtube.com/playlist?list=PLFdkyNDzHdpNVq4q7eDzTQcrHnkVvRs0R"
+    );
+  };
+
+  // 사진 링크
+  const handlePictureClick = () => {
+    window.open("http://naver.me/FUGfHWej");
+  };
+
   return (
     <>
       <Row className="user-attendance-modal-title">
@@ -45,65 +55,21 @@ const Main = ({ history, setIsLoading }) => {
         </Col>
       </Row>
       <Row className="user-attendance-modal-icon">
-        <Col span={6} onClick={handleSearchAttendanceModalOpen}>
-          <Row className="icon-wrap">
-            <Col span={24}>
-              <CheckCircleOutlined className="audit-outlined-icon" />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24} className="icon-text">
-              출석
-            </Col>
-          </Row>
-        </Col>
         <Col
           span={6}
-          onClick={handleUserAddModalOpen}
-          style={{ paddingRight: "14px" }}
+          onClick={handleSearchAttendanceModalOpen}
+          className="icon-wrap"
         >
-          <Row className="icon-wrap">
-            <Col span={24}>
-              <UserAddOutlined className="user-add-outlined-icon" />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24} className="icon-text">
-              등록
-            </Col>
-          </Row>
+          <Image width={60} height={60} src={iconAttendance} preview={false} />
         </Col>
-        <Col
-          span={6}
-          onClick={() =>
-            window.open(
-              "https://youtube.com/playlist?list=PLFdkyNDzHdpNVq4q7eDzTQcrHnkVvRs0R"
-            )
-          }
-          style={{ paddingRight: "10px" }}
-        >
-          <Row className="icon-wrap">
-            <Col span={24}>
-              <YoutubeOutlined className="youtube-outlined-icon" />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24} className="icon-text">
-              영상
-            </Col>
-          </Row>
+        <Col span={6} onClick={handleUserAddModalOpen} className="icon-wrap">
+          <Image width={60} height={60} src={iconUserAdd} preview={false} />
         </Col>
-        <Col span={6} onClick={() => window.open("http://naver.me/FUGfHWej")}>
-          <Row className="icon-wrap">
-            <Col span={24}>
-              <ContactsOutlined className="picture-outlined-icon" />
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24} className="icon-text">
-              사진
-            </Col>
-          </Row>
+        <Col span={6} onClick={handleVideoClick} className="icon-wrap">
+          <Image width={60} height={60} src={iconVideo} preview={false} />
+        </Col>
+        <Col span={6} onClick={handlePictureClick} className="icon-wrap">
+          <Image width={60} height={60} src={iconPicture} preview={false} />
         </Col>
         <div id="userAddModal">
           <UserAddModal

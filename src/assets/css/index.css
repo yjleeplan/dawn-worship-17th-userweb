@@ -110,34 +110,7 @@ body,
   margin-bottom: 30px;
 }
 .user-attendance-modal-icon .icon-wrap {
-  height: 63px;
-}
-.audit-outlined-icon {
-  font-size: 50px;
-  width: 100%;
-  color: #fff;
-  padding-top: 7px;
-}
-.user-add-outlined-icon {
-  font-size: 50px;
-  width: 100%;
-  color: #fff;
-  padding-top: 5px;
-}
-.youtube-outlined-icon {
-  font-size: 63px;
-  width: 100%;
-  color: #fff;
-}
-.picture-outlined-icon {
-  font-size: 63px;
-  width: 100%;
-  color: #fff;
-}
-.icon-text {
   text-align: center;
-  color: #fff;
-  font-weight: bold;
 }
 
 #main-layout #content {
