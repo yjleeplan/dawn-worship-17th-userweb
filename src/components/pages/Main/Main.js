@@ -34,7 +34,8 @@ const Main = ({ history, setIsLoading }) => {
         <Col
           span={8}
           onClick={() =>
-            (window.location = "https://www.youtube.com/watch?v=38hvLwK_BH4")
+            (window.location =
+              "https://youtube.com/playlist?list=PLFdkyNDzHdpNVq4q7eDzTQcrHnkVvRs0R")
           }
         >
           <Row>
@@ -48,7 +49,10 @@ const Main = ({ history, setIsLoading }) => {
             </Col>
           </Row>
         </Col>
-        <Col span={8}>
+        <Col
+          span={8}
+          onClick={() => (window.location = "http://naver.me/FUGfHWej")}
+        >
           <Row>
             <Col span={24}>
               <ContactsOutlined className="picture-outlined-icon" />
