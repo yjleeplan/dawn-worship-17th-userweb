@@ -111,6 +111,8 @@ const Comments = ({ setIsLoading }) => {
   return (
     <div className="comment-wrap">
       <Card
+        className="comment-add-wrap"
+        bordered={false}
         title={
           <>
             <Row>"특별새벽부흥회를 통해 받은 은혜를</Row>
@@ -118,45 +120,45 @@ const Comments = ({ setIsLoading }) => {
           </>
         }
       >
-        <div className="comment-list-wrap">
-          <List
-            dataSource={commentData.comments}
-            // header={`${commentData.comments.length} 댓글`}
-            itemLayout="horizontal"
-            renderItem={(props) => <Comment {...props} />}
-          />
-        </div>
+        <Comment
+          // avatar={<Avatar icon={<UserOutlined />} alt="홍길동" />}
+          content={
+            <>
+              <Input
+                className="comment-user-name"
+                onChange={handleUserNameChange}
+                value={commentUserName}
+                placeholder="이름을 입력해주세요"
+                size="large"
+              />
+              <Input.TextArea
+                className="comment-content"
+                rows={4}
+                onChange={handleCommentChange}
+                value={commentData.value}
+                placeholder="댓글을 입력해주세요"
+              />
+              <Button
+                className="comment-btn"
+                loading={false}
+                onClick={handleSubmit}
+                type="primary"
+              >
+                <EditOutlined />
+                댓글 등록
+              </Button>
+            </>
+          }
+        />
       </Card>
-      <Comment
-        // avatar={<Avatar icon={<UserOutlined />} alt="홍길동" />}
-        content={
-          <>
-            <Input
-              className="comment-user-name"
-              onChange={handleUserNameChange}
-              value={commentUserName}
-              placeholder="이름을 입력해주세요"
-              size="large"
-            />
-            <Input.TextArea
-              className="comment-content"
-              rows={4}
-              onChange={handleCommentChange}
-              value={commentData.value}
-              placeholder="댓글을 입력해주세요"
-            />
-            <Button
-              className="comment-btn"
-              loading={false}
-              onClick={handleSubmit}
-              type="primary"
-            >
-              <EditOutlined />
-              댓글 등록
-            </Button>
-          </>
-        }
-      />
+      <div className="comment-list-wrap">
+        <List
+          dataSource={commentData.comments}
+          header={`${commentData.comments.length} 댓글`}
+          itemLayout="horizontal"
+          renderItem={(props) => <Comment {...props} />}
+        />
+      </div>
     </div>
   );
 };
