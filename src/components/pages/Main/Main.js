@@ -55,15 +55,15 @@ const Main = ({ history, setIsLoading }) => {
         </Col>
       </Row>
       <Row className="user-attendance-modal-icon">
+        <Col span={6} onClick={handleUserAddModalOpen} className="icon-wrap">
+          <Image width={60} height={60} src={iconUserAdd} preview={false} />
+        </Col>
         <Col
           span={6}
           onClick={handleSearchAttendanceModalOpen}
           className="icon-wrap"
         >
           <Image width={60} height={60} src={iconAttendance} preview={false} />
-        </Col>
-        <Col span={6} onClick={handleUserAddModalOpen} className="icon-wrap">
-          <Image width={60} height={60} src={iconUserAdd} preview={false} />
         </Col>
         <Col span={6} onClick={handleVideoClick} className="icon-wrap">
           <Image width={60} height={60} src={iconVideo} preview={false} />
