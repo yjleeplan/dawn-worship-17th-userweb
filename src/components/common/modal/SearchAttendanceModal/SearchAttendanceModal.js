@@ -5,6 +5,7 @@ import _ from "lodash";
 import React, { useState } from "react";
 import * as api from "../../../../api";
 import UserAttendanceModal from "../UserAttendanceModal/UserAttendanceModal";
+import GridCellButton from "./GridCellButton";
 
 const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
   // Form Init
@@ -17,20 +18,24 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     {
       headerName: "이름",
       field: "name",
-      width: 90,
-      cellStyle: { textAlign: "center" },
-    },
-    {
-      headerName: "생년월일",
-      field: "birthday",
-      width: 120,
+      width: 100,
       cellStyle: { textAlign: "center" },
     },
     {
       headerName: "소속",
       field: "department",
-      width: 90,
+      width: 100,
       cellStyle: { textAlign: "center" },
+    },
+    {
+      field: "",
+      width: 100,
+      cellStyle: { textAlign: "center" },
+      cellRendererFramework: GridCellButton,
+      cellRendererParams: (params) => ({
+        data: params.data,
+        onClick: handleCellClicked,
+      }),
     },
   ];
 
@@ -153,7 +158,6 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
                 rowHeight={rowHeight}
                 headerHeight={headerHeight}
                 suppressMovableColumns={true}
-                onCellClicked={handleCellClicked}
               />
             </div>
           )}
