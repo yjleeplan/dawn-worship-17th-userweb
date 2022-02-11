@@ -7,8 +7,6 @@ import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
 const Header = ({ setIsLoading }) => {
   /** State */
   const [userAddModalVisible, setUserAddModalVisible] = useState(false);
-  const [searchAttendanceModalVisible, setSearchAttendanceModalVisible] =
-    useState(false);
 
   // 사용자 등록 모달 오픈
   const handleUserAddModalOpen = () => {
@@ -18,16 +16,6 @@ const Header = ({ setIsLoading }) => {
   // 사용자 등록 모달 닫기
   const handleUserAddModalClose = () => {
     setUserAddModalVisible(false);
-  };
-
-  // 출석체크 모달 오픈
-  const handleSearchAttendanceModalOpen = () => {
-    setSearchAttendanceModalVisible(true);
-  };
-
-  // 출석체크 모달 닫기
-  const handleSearchAttendanceModalClose = () => {
-    setSearchAttendanceModalVisible(false);
   };
 
   return (
@@ -55,25 +43,6 @@ const Header = ({ setIsLoading }) => {
             </Row>
           </div>
         </Col>
-        {/* <Col span={3} className="header-right">
-          <div
-            className="user-add-button-wrap"
-            onClick={handleSearchAttendanceModalOpen}
-          >
-            <Row>
-              <Col span={24}>
-                <span className="user-add-button">
-                  <CheckCircleOutlined />
-                </span>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={24}>
-                <span>출석</span>
-              </Col>
-            </Row>
-          </div>
-        </Col> */}
       </Row>
       <div id="userAddModal">
         <UserAddModal
@@ -82,13 +51,6 @@ const Header = ({ setIsLoading }) => {
           setIsLoading={setIsLoading}
         />
       </div>
-      {/* <div id="searchAttendanceModal">
-        <SearchAttendanceModal
-          visible={searchAttendanceModalVisible}
-          onCancel={handleSearchAttendanceModalClose}
-          setIsLoading={setIsLoading}
-        />
-      </div> */}
     </div>
   );
 };
