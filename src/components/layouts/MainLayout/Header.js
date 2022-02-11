@@ -1,8 +1,7 @@
-import { CheckCircleOutlined, UserAddOutlined } from "@ant-design/icons";
+import { UserAddOutlined } from "@ant-design/icons";
 import { Col, Image, Row } from "antd";
 import React, { useState } from "react";
 import logo from "../../../assets/images/logo.png";
-import SearchAttendanceModal from "../../common/modal/SearchAttendanceModal/SearchAttendanceModal";
 import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
 
 const Header = ({ setIsLoading }) => {
@@ -34,7 +33,7 @@ const Header = ({ setIsLoading }) => {
   return (
     <div id="header">
       <Row>
-        <Col span={18}>
+        <Col span={21}>
           <Image width={102} height={25} src={logo} preview={false} />
         </Col>
         <Col span={3} className="header-right">
@@ -56,7 +55,7 @@ const Header = ({ setIsLoading }) => {
             </Row>
           </div>
         </Col>
-        <Col span={3} className="header-right">
+        {/* <Col span={3} className="header-right">
           <div
             className="user-add-button-wrap"
             onClick={handleSearchAttendanceModalOpen}
@@ -74,7 +73,7 @@ const Header = ({ setIsLoading }) => {
               </Col>
             </Row>
           </div>
-        </Col>
+        </Col> */}
       </Row>
       <div id="userAddModal">
         <UserAddModal
@@ -83,13 +82,13 @@ const Header = ({ setIsLoading }) => {
           setIsLoading={setIsLoading}
         />
       </div>
-      <div id="searchAttendanceModal">
+      {/* <div id="searchAttendanceModal">
         <SearchAttendanceModal
           visible={searchAttendanceModalVisible}
           onCancel={handleSearchAttendanceModalClose}
           setIsLoading={setIsLoading}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

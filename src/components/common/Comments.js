@@ -1,5 +1,5 @@
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Comment, Input, List, message } from "antd";
+import { Avatar, Button, Card, Comment, Input, List, message, Row } from "antd";
 import _ from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -110,12 +110,23 @@ const Comments = ({ setIsLoading }) => {
 
   return (
     <div className="comment-wrap">
-      <List
-        dataSource={commentData.comments}
-        header={`${commentData.comments.length} 댓글`}
-        itemLayout="horizontal"
-        renderItem={(props) => <Comment {...props} />}
-      />
+      <Card
+        title={
+          <>
+            <Row>"특별새벽부흥회를 통해 받은 은혜를</Row>
+            <Row>나눠주세요!"</Row>
+          </>
+        }
+      >
+        <div className="comment-list-wrap">
+          <List
+            dataSource={commentData.comments}
+            // header={`${commentData.comments.length} 댓글`}
+            itemLayout="horizontal"
+            renderItem={(props) => <Comment {...props} />}
+          />
+        </div>
+      </Card>
       <Comment
         // avatar={<Avatar icon={<UserOutlined />} alt="홍길동" />}
         content={
