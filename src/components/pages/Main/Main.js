@@ -83,6 +83,7 @@ const Main = ({ history, setIsLoading }) => {
             visible={searchAttendanceModalVisible}
             onCancel={handleSearchAttendanceModalClose}
             setIsLoading={setIsLoading}
+            attendanceAble={false}
           />
         </div>
       </Row>
