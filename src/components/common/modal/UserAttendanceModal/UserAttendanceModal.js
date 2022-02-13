@@ -1,5 +1,6 @@
 import { Col, Divider, Image, message, Modal, Row, Typography } from "antd";
 import _ from "lodash";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../../api";
 import title from "../../../../assets/images/title.png";
@@ -10,8 +11,25 @@ const { Text } = Typography;
 const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
   /** State */
   const [userDetail, setUserDetail] = useState([]);
+  const [today, setToday] = useState(0);
 
   /** Effect */
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentToday = currentDate.getDate();
+    setToday(currentToday);
+
+    const crTime = moment().format("HHmmss");
+    console.log(crTime);
+    console.log(moment().hour());
+    // if (crTime > 080000) {
+
+    // }
+
+    console.log(moment().format("HHmmss"));
+    // eslint-disable-next-line
+  }, []);
+
   useEffect(() => {
     !_.isEmpty(userInfo) && handleSelectUser();
     // eslint-disable-next-line
@@ -77,7 +95,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                         attendanceId={userDetail.attendance.id}
                         onSelectUser={handleSelectUser}
                         setIsLoading={setIsLoading}
-                        attendanceAble={false}
+                        today={today}
                       />
                     </Col>
                   );
@@ -97,9 +115,9 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                         index={index}
                         attendanceYn={item[`day${Number(index) + 1}`]}
                         attendanceId={userDetail.attendance.id}
-                        attendanceAble={false}
                         onSelectUser={handleSelectUser}
                         setIsLoading={setIsLoading}
+                        today={today}
                       />
                     </Col>
                   );
