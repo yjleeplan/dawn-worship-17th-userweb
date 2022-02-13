@@ -78,7 +78,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                         attendanceAble={item[`day${Number(index) + 1}`] === "N"}
                         onSelectUser={handleSelectUser}
                         setIsLoading={setIsLoading}
-                        attendanceAble={attendanceAble}
+                        attendanceAble={false}
                       />
                     </Col>
                   );
