@@ -1,6 +1,5 @@
 import { Col, Divider, Image, message, Modal, Row, Typography } from "antd";
 import _ from "lodash";
-import moment from "moment";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../../api";
 import title from "../../../../assets/images/title.png";
@@ -18,15 +17,6 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
     const currentDate = new Date();
     const currentToday = currentDate.getDate();
     setToday(currentToday);
-
-    const crTime = moment().format("HHmmss");
-    console.log(crTime);
-    console.log(moment().hour());
-    // if (crTime > 080000) {
-
-    // }
-
-    console.log(moment().format("HHmmss"));
     // eslint-disable-next-line
   }, []);
 
