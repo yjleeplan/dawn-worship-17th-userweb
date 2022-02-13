@@ -75,7 +75,6 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                         index={index}
                         attendanceYn={item[`day${Number(index) + 1}`]}
                         attendanceId={userDetail.attendance.id}
-                        attendanceAble={item[`day${Number(index) + 1}`] === "N"}
                         onSelectUser={handleSelectUser}
                         setIsLoading={setIsLoading}
                         attendanceAble={false}
