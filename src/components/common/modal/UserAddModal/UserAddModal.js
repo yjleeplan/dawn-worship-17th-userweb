@@ -35,6 +35,8 @@ const UserAddModal = ({ visible, onCancel, setIsLoading }) => {
     { label: "유년부", value: "유년부" },
     { label: "유치부", value: "유치부" },
     { label: "영아부", value: "영아부" },
+    { label: "해외", value: "해외" },
+    { label: "기타", value: "기타" },
   ];
 
   /** Hook */
