@@ -1,5 +1,6 @@
 import { Col, Divider, Image, message, Modal, Row, Typography } from "antd";
 import _ from "lodash";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../../api";
 import title from "../../../../assets/images/title.png";
@@ -11,12 +12,16 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
   /** State */
   const [userDetail, setUserDetail] = useState([]);
   const [today, setToday] = useState(0);
+  const [hour, setHour] = useState(0);
 
   /** Effect */
   useEffect(() => {
     const currentDate = new Date();
     const currentToday = currentDate.getDate();
+    const currentHour = moment().hour();
+
     setToday(currentToday);
+    setHour(currentHour);
     // eslint-disable-next-line
   }, []);
 
@@ -86,6 +91,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                         onSelectUser={handleSelectUser}
                         setIsLoading={setIsLoading}
                         today={today}
+                        hour={hour}
                       />
                     </Col>
                   );
@@ -108,6 +114,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
                         onSelectUser={handleSelectUser}
                         setIsLoading={setIsLoading}
                         today={today}
+                        hour={hour}
                       />
                     </Col>
                   );

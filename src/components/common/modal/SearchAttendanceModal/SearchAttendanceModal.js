@@ -18,18 +18,15 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     {
       headerName: "이름",
       field: "name",
-      width: 100,
       cellStyle: { textAlign: "center" },
     },
     {
       headerName: "소속",
       field: "department",
-      width: 100,
       cellStyle: { textAlign: "center" },
     },
     {
       field: "",
-      width: 100,
       cellStyle: { textAlign: "center" },
       cellRendererFramework: GridCellButton,
       cellRendererParams: (params) => ({
@@ -158,6 +155,7 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
                 rowHeight={rowHeight}
                 headerHeight={headerHeight}
                 suppressMovableColumns={true}
+                onGridReady={(params) => params.api.sizeColumnsToFit()}
               />
             </div>
           )}
