@@ -1,6 +1,6 @@
 import { Image, message } from "antd";
 import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as api from "../../api";
 import btn1 from "../../assets/images/btn_1.png";
 import btn10 from "../../assets/images/btn_10.png";
@@ -55,6 +55,7 @@ const Stamp = ({
     }[today];
   };
 
+  // 스탬프 Formatter
   const stampFormatter = (value) => {
     return {
       DAY1: btn1,
@@ -75,52 +76,47 @@ const Stamp = ({
     }[value];
   };
 
-  /** State */
-  const [isUpdateEnable, setIsUpdateEnable] = useState(true);
-
-  /** Effect */
-  useEffect(() => {
-    let source = IS_COMPLETE(attendanceYn);
-    if (!source) {
+  // 스탬프 타입
+  const stampType = () => {
+    let type = IS_COMPLETE(attendanceYn);
+    if (!type) {
       if (
         _.includes(BONUS_DAYS, today) &&
         BONUS_START_HOUR <= hour &&
         hour < BONUS_END_HOUR
       ) {
-        source = IS_BONUS(index, today);
+        type = IS_BONUS(index, today);
       } else {
-        source = IS_NOT_COMPLETE(index, today);
+        type = IS_NOT_COMPLETE(index, today);
       }
     }
 
-    if (source === "COMPLETE" || source === "BONUS" || source === "SOON") {
-      setIsUpdateEnable(false);
-    }
-    // eslint-disable-next-line
-  }, []);
+    return type;
+  };
 
-  // 출석 스탬프 이미지 소스
+  // 스탬프 이미지 소스
   const stampSource = () => {
-    let source = IS_COMPLETE(attendanceYn);
-    if (!source) {
-      if (
-        _.includes(BONUS_DAYS, today) &&
-        BONUS_START_HOUR <= hour &&
-        hour < BONUS_END_HOUR
-      ) {
-        source = IS_BONUS(index, today);
-      } else {
-        source = IS_NOT_COMPLETE(index, today);
-      }
+    const type = stampType();
+
+    return stampFormatter(type);
+  };
+
+  // 출석 체크 가능 여부
+  const isUpdateEnable = () => {
+    const type = stampType();
+    let result = true;
+
+    if (type === "COMPLETE" || type === "BONUS" || type === "SOON") {
+      result = false;
     }
 
-    return stampFormatter(source);
+    return result;
   };
 
   // 출석
   const handleUpdatedAttendance = async () => {
     try {
-      if (isUpdateEnable) {
+      if (isUpdateEnable()) {
         if (
           _.includes(BONUS_DAYS, today) &&
           BONUS_START_HOUR <= hour &&
@@ -134,7 +130,6 @@ const Stamp = ({
           });
 
           onSelectUser();
-          setIsUpdateEnable(false);
         } else {
           if (todayFormatter(today) === `day${Number(index) + 1}`) {
             if (ATTENDANCE_START_HOUR <= hour && hour < ATTENDANCE_END_HOUR) {
@@ -146,7 +141,6 @@ const Stamp = ({
               });
 
               onSelectUser();
-              setIsUpdateEnable(false);
             } else {
               message.warning("출석은 04:00 ~ 08:00 사이에만 가능합니다.");
             }
