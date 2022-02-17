@@ -1,4 +1,4 @@
-import { Image, message } from "antd";
+import { Image, message, Modal } from "antd";
 import React from "react";
 import * as api from "../../api";
 import btn1 from "../../assets/images/btn_1.png";
@@ -84,25 +84,36 @@ const AdminStamp = ({
   };
 
   // 출석
-  const handleUpdatedAttendance = async () => {
-    try {
-      setIsLoading(true);
+  const handleUpdatedAttendance = () => {
+    Modal.confirm({
+      title: `${index + 1}일차`,
+      content:
+        attendanceYn === "Y"
+          ? "결석 처리하시겠습니까?"
+          : "출석 처리하시겠습니까?",
+      okText: "확인",
+      cancelText: "취소",
+      onOk: async () => {
+        try {
+          setIsLoading(true);
 
-      const value = attendanceYn === "Y" ? "N" : "Y";
+          const value = attendanceYn === "N" ? "Y" : "N";
 
-      await api.updatedAttendance({
-        path: { attendance_id: attendanceId },
-        data: { [`day${Number(index) + 1}`]: value },
-      });
+          await api.updatedAttendance({
+            path: { attendance_id: attendanceId },
+            data: { [`day${Number(index) + 1}`]: value },
+          });
 
-      onSelectUser();
-    } catch (error) {
-      message.error(
-        error.response ? `${error.response.data.message}` : "출석 실패"
-      );
-    } finally {
-      setIsLoading(false);
-    }
+          onSelectUser();
+        } catch (error) {
+          message.error(
+            error.response ? `${error.response.data.message}` : "출석 실패"
+          );
+        } finally {
+          setIsLoading(false);
+        }
+      },
+    });
   };
 
   return (

@@ -492,4 +492,35 @@ body,
 .admin-search-wrap .ant-row.ant-form-item {
   margin-bottom: 0;
 }
+
+.admin-grid-wrap .grid-info-wrap {
+  margin-bottom: 5px;
+}
+.admin-grid-wrap .grid-info-wrap .total-cnt-wrap {
+  padding-top: 16px;
+}
+.admin-grid-wrap .grid-info-wrap .excel-btn-wrap {
+  text-align: right;
+}
+.admin-grid-wrap .grid-info-wrap .excel-btn-wrap .ant-tag {
+  padding: 4px 10px;
+  color: #2e7d32;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.admin-grid-wrap {
+  margin-top: 20px;
+  padding-bottom: 30px;
+}
+
+.admin-grid-wrap .ag-theme-alpine {
+  border-radius: 10px;
+  /* box-shadow: 0 2px 15px rgb(0 0 0 / 30%); */
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
 /* Admin */
