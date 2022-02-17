@@ -1,17 +1,47 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { AgGridReact } from "ag-grid-react";
-import { Form, Input, message, Modal } from "antd";
+import { Col, Form, Input, message, Modal, Row, Select } from "antd";
 import _ from "lodash";
 import React, { useState } from "react";
 import * as api from "../../../../api";
+import { addComma } from "../../../../lib/addComma";
 import GridCellButton from "../../GridCellButton";
-import UserAttendanceModal from "../UserAttendanceModal/UserAttendanceModal";
+import AdminUserAttendanceModal from "../AdminUserAttendanceModal/AdminUserAttendanceModal";
 
-const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
+const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
   // Form Init
   const initialValues = {
+    department: null,
     keyword: "",
   };
+
+  // 소속 리스트
+  const deptOptions = [
+    { label: "전체", value: "" },
+    { label: "교역자", value: "교역자" },
+    { label: "믿음1", value: "믿음1" },
+    { label: "믿음2", value: "믿음2" },
+    { label: "믿음3", value: "믿음3" },
+    { label: "소망1", value: "소망1" },
+    { label: "소망2", value: "소망2" },
+    { label: "소망3", value: "소망3" },
+    { label: "소망4", value: "소망4" },
+    { label: "사랑1", value: "사랑1" },
+    { label: "사랑2", value: "사랑2" },
+    { label: "사랑3", value: "사랑3" },
+    { label: "사랑4", value: "사랑4" },
+    { label: "신혼부부", value: "신혼부부" },
+    { label: "에하드", value: "에하드" },
+    { label: "청년부", value: "청년부" },
+    { label: "고등부", value: "고등부" },
+    { label: "중등부", value: "중등부" },
+    { label: "초등부", value: "초등부" },
+    { label: "유년부", value: "유년부" },
+    { label: "유치부", value: "유치부" },
+    { label: "영아부", value: "영아부" },
+    { label: "해외", value: "해외" },
+    { label: "기타", value: "기타" },
+  ];
 
   // 검색결과 그리드 컬럼 정의
   const columnDefs = [
@@ -69,13 +99,14 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
   };
 
   // Form Submit
-  const onFinish = async ({ keyword }) => {
+  const onFinish = async ({ keyword, department }) => {
     try {
       setIsLoading(true);
 
       const { data: users } = await api.listUser({
         query: {
           ...(keyword && { name: keyword }),
+          ...(department && { department }),
         },
       });
 
@@ -135,33 +166,46 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
         initialValues={initialValues}
         onFinish={onFinish}
       >
-        <div className="search-wrap">
-          <Form.Item name="keyword">
-            <Input
-              placeholder="이름을 입력해주세요"
-              suffix={<SearchOutlined onClick={handleSearch} />}
-            />
-          </Form.Item>
+        <div className="admin-search-wrap">
+          <Row>
+            <Col span={11}>
+              <Form.Item name="department">
+                <Select placeholder="소속" options={deptOptions} size="large" />
+              </Form.Item>
+            </Col>
+            <Col span={12} offset={1}>
+              <Form.Item name="keyword">
+                <Input
+                  size="large"
+                  placeholder="이름"
+                  suffix={<SearchOutlined onClick={handleSearch} />}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </div>
         <div className="grid-wrap">
           {!_.isEmpty(resultList) && (
-            <div
-              className="ag-theme-alpine"
-              style={{ height: getAgGridHeight() }}
-            >
-              <AgGridReact
-                columnDefs={columnDefs}
-                rowData={resultList}
-                rowHeight={rowHeight}
-                headerHeight={headerHeight}
-                suppressMovableColumns={true}
-                onGridReady={(params) => params.api.sizeColumnsToFit()}
-              />
-            </div>
+            <>
+              총 {addComma(resultList.length)}명
+              <div
+                className="ag-theme-alpine"
+                style={{ height: getAgGridHeight() }}
+              >
+                <AgGridReact
+                  columnDefs={columnDefs}
+                  rowData={resultList}
+                  rowHeight={rowHeight}
+                  headerHeight={headerHeight}
+                  suppressMovableColumns={true}
+                  onGridReady={(params) => params.api.sizeColumnsToFit()}
+                />
+              </div>
+            </>
           )}
         </div>
         <div id="userAttendanceModal">
-          <UserAttendanceModal
+          <AdminUserAttendanceModal
             visible={userAttendanceModalVisible}
             onCancel={handleUserAttendanceModalClose}
             userInfo={selectedRowData}
@@ -173,4 +217,4 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
   );
 };
 
-export default SearchAttendanceModal;
+export default AdminSearchAttendanceModal;
