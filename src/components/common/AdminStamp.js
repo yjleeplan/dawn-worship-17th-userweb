@@ -88,9 +88,9 @@ const AdminStamp = ({
     Modal.confirm({
       title: `${index + 1}일차`,
       content:
-        attendanceYn === "Y"
-          ? "결석 처리하시겠습니까?"
-          : "출석 처리하시겠습니까?",
+        attendanceYn === "N"
+          ? "출석 처리하시겠습니까?"
+          : "결석 처리하시겠습니까?",
       okText: "확인",
       cancelText: "취소",
       onOk: async () => {
