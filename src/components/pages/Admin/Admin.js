@@ -7,10 +7,10 @@ import iconUserAdd from "../../../assets/images/icon_user_add.png";
 import iconVideo from "../../../assets/images/icon_video.png";
 import title from "../../../assets/images/title.png";
 import Comments from "../../common/Comments";
-import SearchAttendanceModal from "../../common/modal/SearchAttendanceModal/SearchAttendanceModal";
+import AdminSearchAttendanceModal from "../../common/modal/AdminSearchAttendanceModal/AdminSearchAttendanceModal";
 import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
 
-const Main = ({ history, setIsLoading }) => {
+const Admin = ({ history, setIsLoading }) => {
   /** State */
   const [userAddModalVisible, setUserAddModalVisible] = useState(false);
   const [searchAttendanceModalVisible, setSearchAttendanceModalVisible] =
@@ -108,7 +108,7 @@ const Main = ({ history, setIsLoading }) => {
           />
         </div>
         <div id="searchAttendanceModal">
-          <SearchAttendanceModal
+          <AdminSearchAttendanceModal
             visible={searchAttendanceModalVisible}
             onCancel={handleSearchAttendanceModalClose}
             setIsLoading={setIsLoading}
@@ -121,4 +121,4 @@ const Main = ({ history, setIsLoading }) => {
   );
 };
 
-export default Main;
+export default Admin;

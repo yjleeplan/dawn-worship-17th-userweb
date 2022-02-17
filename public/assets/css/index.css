@@ -94,16 +94,10 @@ body,
   text-align: right;
 }
 
-#main-layout #header .user-add-button .anticon.anticon-user-add svg {
-  width: 20px;
-  height: 20px;
-  color: #fff;
-}
-
-#main-layout #header .user-add-button .anticon.anticon-check-circle svg {
-  width: 20px;
-  height: 20px;
-  color: #fff;
+#main-layout #header .header-right .ant-tag {
+  font-size: 14px;
+  padding-top: 3px;
+  height: 29px;
 }
 
 .user-attendance-modal-icon {
@@ -474,6 +468,11 @@ body,
   font-size: 22px;
 }
 
+.ant-modal-wrap.search-attendance-modal-wrap .excel-btn {
+  background-color: #2e7d32;
+  color: #fff;
+}
+
 .grid-cell-button {
   border-radius: 20px;
 }
@@ -488,3 +487,9 @@ body,
   }
 }
 /* SearchAttendanceModal */
+
+/* Admin */
+.admin-search-wrap .ant-row.ant-form-item {
+  margin-bottom: 0;
+}
+/* Admin */
