@@ -74,6 +74,7 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
 
   /** Hook */
   const [form] = Form.useForm();
+  //   const gridRef = useRef();
 
   /** State */
   const [resultList, setResultList] = useState([]);
@@ -149,6 +150,11 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     onCancel();
   };
 
+  // Excel Download
+  //   const handleExcelDownload = () => {
+  //     gridRef.current.api.exportDataAsExcel();
+  //   };
+
   return (
     <Modal
       wrapClassName="search-attendance-modal-wrap"
@@ -184,10 +190,25 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
             </Col>
           </Row>
         </div>
-        <div className="grid-wrap">
+        <div className="admin-grid-wrap">
           {!_.isEmpty(resultList) && (
             <>
-              총 {addComma(resultList.length)}명
+              <Row className="grid-info-wrap">
+                <Col span={12} className="total-cnt-wrap">
+                  총 {addComma(resultList.length)}명
+                </Col>
+                <Col span={12} className="excel-btn-wrap">
+                  {/* <Tag onClick={handleExcelDownload}>
+                    <Image
+                      width={25}
+                      height={25}
+                      src={excelBtn}
+                      preview={false}
+                    />
+                    다운로드
+                  </Tag> */}
+                </Col>
+              </Row>
               <div
                 className="ag-theme-alpine"
                 style={{ height: getAgGridHeight() }}
@@ -201,6 +222,13 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
                   onGridReady={(params) => params.api.sizeColumnsToFit()}
                 />
               </div>
+              {/* <div>
+                <AgGridReact
+                  ref={gridRef}
+                  columnDefs={columnDefs}
+                  rowData={resultList}
+                />
+              </div> */}
             </>
           )}
         </div>
