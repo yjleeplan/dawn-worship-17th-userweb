@@ -2,21 +2,6 @@ import { Image, message } from "antd";
 import _ from "lodash";
 import React from "react";
 import * as api from "../../api";
-import btn1 from "../../assets/images/btn_1.png";
-import btn10 from "../../assets/images/btn_10.png";
-import btn11 from "../../assets/images/btn_11.png";
-import btn12 from "../../assets/images/btn_12.png";
-import btn2 from "../../assets/images/btn_2.png";
-import btn3 from "../../assets/images/btn_3.png";
-import btn4 from "../../assets/images/btn_4.png";
-import btn5 from "../../assets/images/btn_5.png";
-import btn6 from "../../assets/images/btn_6.png";
-import btn7 from "../../assets/images/btn_7.png";
-import btn8 from "../../assets/images/btn_8.png";
-import btn9 from "../../assets/images/btn_9.png";
-import bonus from "../../assets/images/btn_bonus.png";
-import complete from "../../assets/images/btn_complete.png";
-import soon from "../../assets/images/btn_soon.png";
 import {
   ATTENDANCE_END_HOUR,
   ATTENDANCE_START_HOUR,
@@ -58,21 +43,26 @@ const Stamp = ({
   // 스탬프 Formatter
   const stampFormatter = (value) => {
     return {
-      DAY1: btn1,
-      DAY2: btn2,
-      DAY3: btn3,
-      DAY4: btn4,
-      DAY5: btn5,
-      DAY6: btn6,
-      DAY7: btn7,
-      DAY8: btn8,
-      DAY9: btn9,
-      DAY10: btn10,
-      DAY11: btn11,
-      DAY12: btn12,
-      COMPLETE: complete,
-      BONUS: bonus,
-      SOON: soon,
+      DAY1: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_1.png",
+      DAY2: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_2.png",
+      DAY3: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_3.png",
+      DAY4: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_4.png",
+      DAY5: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_5.png",
+      DAY6: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_6.png",
+      DAY7: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_7.png",
+      DAY8: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_8.png",
+      DAY9: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_9.png",
+      DAY10:
+        "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_10.png",
+      DAY11:
+        "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_11.png",
+      DAY12:
+        "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_12.png",
+      COMPLETE:
+        "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_complete.png",
+      BONUS:
+        "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_bonus.png",
+      SOON: "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/btn_soon.png",
     }[value];
   };
 

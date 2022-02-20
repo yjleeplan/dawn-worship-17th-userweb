@@ -1,10 +1,6 @@
 import { Col, Image, Row } from "antd";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
-import iconAttendance from "../../../assets/images/icon_attendance.png";
-import iconPicture from "../../../assets/images/icon_picture.png";
-import iconUserAdd from "../../../assets/images/icon_user_add.png";
-import iconVideo from "../../../assets/images/icon_video.png";
 import Comments from "../../common/Comments";
 import SearchAttendanceModal from "../../common/modal/SearchAttendanceModal/SearchAttendanceModal";
 import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
@@ -74,7 +70,9 @@ const Main = ({ history, setIsLoading }) => {
           <Image
             width={"80%"}
             height={"100%"}
-            src={iconUserAdd}
+            src={
+              "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/icon_user_add.png"
+            }
             preview={false}
           />
         </Col>
@@ -86,7 +84,9 @@ const Main = ({ history, setIsLoading }) => {
           <Image
             width={"80%"}
             height={"100%"}
-            src={iconAttendance}
+            src={
+              "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/icon_attendance.png"
+            }
             preview={false}
           />
         </Col>
@@ -94,7 +94,9 @@ const Main = ({ history, setIsLoading }) => {
           <Image
             width={"80%"}
             height={"100%"}
-            src={iconVideo}
+            src={
+              "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/icon_video.png"
+            }
             preview={false}
           />
         </Col>
@@ -102,7 +104,9 @@ const Main = ({ history, setIsLoading }) => {
           <Image
             width={"80%"}
             height={"100%"}
-            src={iconPicture}
+            src={
+              "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/icon_picture.png"
+            }
             preview={false}
           />
         </Col>

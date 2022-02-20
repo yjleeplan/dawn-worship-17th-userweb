@@ -3,7 +3,6 @@ import _ from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../../api";
-import title from "../../../../assets/images/title.png";
 import Stamp from "../../Stamp";
 
 const { Text } = Typography;
@@ -67,7 +66,14 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
     >
       <Row className="user-attendance-modal-title">
         <Col span={24}>
-          <Image width={192} height={160} src={title} preview={false} />
+          <Image
+            width={192}
+            height={160}
+            src={
+              "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/title.png"
+            }
+            preview={false}
+          />
         </Col>
       </Row>
       <Row className="user-attendance-modal-info">
