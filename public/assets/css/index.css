@@ -29,8 +29,8 @@ body,
   display: flex;
   flex: auto;
   flex-direction: column;
-  background-image: url(/src/assets/images/background.jpg);
-  /* background-image: url(/src/assets/images/happysun_190218__030.jpg); */
+  /* background-image: url(/src/assets/images/background.jpg); */
+  background-image: url(https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/background.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -178,7 +178,8 @@ body,
 
 .ant-modal-wrap.user-attendance-modal-wrap .ant-modal-body {
   min-height: 500px;
-  background-image: url(/src/assets/images/attendance_bg.png);
+  /* background-image: url(/src/assets/images/attendance_bg.png); */
+  background-image: url(https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/attendance_bg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
