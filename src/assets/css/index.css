@@ -13,46 +13,6 @@ body,
   height: 100%;
 }
 
-/* Sample Layout */
-#sample-layout {
-  box-sizing: border-box;
-  display: flex;
-  flex: auto;
-  flex-direction: column;
-  min-height: 0;
-}
-
-#sample-layout #header {
-  color: #fff;
-  background: #7dbcea;
-  height: 160px;
-  padding: 0 50px;
-  line-height: 160px;
-  flex: 0 0 auto;
-  text-align: center;
-}
-
-#sample-layout #content {
-  min-height: 640px;
-  color: #fff;
-  line-height: 640px;
-  background: rgba(16, 142, 233, 1);
-  flex: auto;
-  text-align: center;
-}
-
-#sample-layout #footer {
-  border: 1px soild #000;
-  height: 140px;
-  color: #fff;
-  line-height: 140px;
-  background: rgb(31, 16, 233);
-  flex: auto;
-  text-align: center;
-}
-
-/* Sample Layout */
-
 /* Main Layout */
 .ant-spin-nested-loading {
   height: 100%;
