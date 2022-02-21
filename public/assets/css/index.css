@@ -461,6 +461,7 @@ body,
 }
 .admin-grid-wrap .grid-info-wrap .excel-btn-wrap {
   text-align: right;
+  cursor: pointer;
 }
 .admin-grid-wrap .grid-info-wrap .excel-btn-wrap .ant-tag {
   padding: 4px 10px;
