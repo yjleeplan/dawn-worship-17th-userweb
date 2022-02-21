@@ -51,7 +51,7 @@ const Comments = ({ setIsLoading }) => {
       const { data: comments } = await api.listComment({
         query: {
           offset: 0,
-          limit: 50,
+          limit: 30,
         },
       });
       const newData = _.map(comments.items, (item) => {
