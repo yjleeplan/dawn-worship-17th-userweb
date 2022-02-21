@@ -1,9 +1,12 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { AgGridReact } from "ag-grid-react";
-import { Col, Form, Input, message, Modal, Row, Select } from "antd";
+import { Col, Form, Image, Input, message, Modal, Row, Select, Tag } from "antd";
 import _ from "lodash";
+import moment from 'moment';
 import React, { useState } from "react";
+import * as xlsx from 'xlsx';
 import * as api from "../../../../api";
+import excelBtn from '../../../../assets/images/btn_excel.png';
 import { addComma } from "../../../../lib/addComma";
 import GridCellButton from "../../GridCellButton";
 import AdminUserAttendanceModal from "../AdminUserAttendanceModal/AdminUserAttendanceModal";
@@ -150,10 +153,33 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     onCancel();
   };
 
-  // Excel Download
-  //   const handleExcelDownload = () => {
-  //     gridRef.current.api.exportDataAsExcel();
-  //   };
+  const handleExcelDownload = async () => {
+    try {
+      setIsLoading(true);
+      const { data: users } = await api.listUserForExcel();
+      const excelDatas = _.map(users, (user) => {
+        return {
+          부서: user.department,
+          이름: user.name,
+          ..._.omit(user, ["department", "name"]),
+        };
+      });
+      const worksheet = xlsx.utils.json_to_sheet(excelDatas);
+      const workbook = xlsx.utils.book_new();
+      xlsx.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      xlsx.writeFile(workbook, `온라인_출석명단_${moment().format("YYYYMMDDHHmm")}.xlsx`);
+    } catch (error) {
+      Modal.error({
+        title: "엑셀 다운로드 실패",
+        content: error.response
+          ? `${error.response.data.code}, ${error.response.data.message}`
+          : error.message,
+        okText: "확인",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -198,7 +224,7 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
                   총 {addComma(resultList.length)}명
                 </Col>
                 <Col span={12} className="excel-btn-wrap">
-                  {/* <Tag onClick={handleExcelDownload}>
+                  <Tag onClick={handleExcelDownload}>
                     <Image
                       width={25}
                       height={25}
@@ -206,7 +232,7 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
                       preview={false}
                     />
                     다운로드
-                  </Tag> */}
+                  </Tag>
                 </Col>
               </Row>
               <div
