@@ -24,9 +24,14 @@ const Comments = ({ setIsLoading }) => {
   /** State */
   const [commentUserName, setCommentUserName] = useState("");
   const [commentData, setCommentData] = useState({
+    totalCount: 0,
     comments: [],
     value: "",
   });
+  // const [commentOptions, setCommentOptions] = useState({
+  //   offset: 0,
+  //   limit: 10,
+  // });
 
   /** Effect */
   useEffect(() => {
@@ -34,12 +39,22 @@ const Comments = ({ setIsLoading }) => {
     // eslint-disable-next-line
   }, []);
 
+  // 댓글 스크롤 이벤트
+  // const handleScroll = () => {
+  //   console.log("scrolled");
+  // };
+
   // 댓글 목록 조회
   const handleListComment = async () => {
     try {
       setIsLoading(true);
-      const { data: comments } = await api.listComment({});
-      const newData = _.map(comments, (item) => {
+      const { data: comments } = await api.listComment({
+        query: {
+          offset: 0,
+          limit: 50,
+        },
+      });
+      const newData = _.map(comments.items, (item) => {
         return {
           author: item.user_name,
           avatar: (
@@ -58,6 +73,7 @@ const Comments = ({ setIsLoading }) => {
       setCommentData({
         value: "",
         comments: newData,
+        totalCount: comments.total,
       });
     } catch (error) {
       message.error(
@@ -154,7 +170,7 @@ const Comments = ({ setIsLoading }) => {
       <div className="comment-list-wrap">
         <List
           dataSource={commentData.comments}
-          header={`${commentData.comments.length} 댓글`}
+          header={`${commentData.totalCount} 댓글`}
           itemLayout="horizontal"
           renderItem={(props) => <Comment {...props} />}
         />
