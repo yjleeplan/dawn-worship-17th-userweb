@@ -5,6 +5,7 @@ import iconAttendance from "../../../assets/images/icon_attendance.png";
 import iconPicture from "../../../assets/images/icon_picture.png";
 import iconUserAdd from "../../../assets/images/icon_user_add.png";
 import iconVideo from "../../../assets/images/icon_video.png";
+import title from "../../../assets/images/title.png";
 import Comments from "../../common/Comments";
 import SearchAttendanceModal from "../../common/modal/SearchAttendanceModal/SearchAttendanceModal";
 import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
@@ -59,14 +60,7 @@ const Main = ({ history, setIsLoading }) => {
     <>
       <Row className="user-attendance-modal-title">
         <Col span={24}>
-          <Image
-            width={192}
-            height={160}
-            src={
-              "https://dawn-worship-17th-images.s3.ap-northeast-2.amazonaws.com/title.png"
-            }
-            preview={false}
-          />
+          <Image width={192} height={160} src={title} preview={false} />
         </Col>
       </Row>
       <Row className="user-attendance-modal-icon">
