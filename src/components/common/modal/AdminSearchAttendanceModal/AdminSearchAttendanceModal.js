@@ -1,12 +1,22 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { AgGridReact } from "ag-grid-react";
-import { Col, Form, Image, Input, message, Modal, Row, Select, Tag } from "antd";
+import {
+  Col,
+  Form,
+  Image,
+  Input,
+  message,
+  Modal,
+  Row,
+  Select,
+  Tag,
+} from "antd";
 import _ from "lodash";
-import moment from 'moment';
+import moment from "moment";
 import React, { useState } from "react";
-import * as xlsx from 'xlsx';
+import * as xlsx from "xlsx";
 import * as api from "../../../../api";
-import excelBtn from '../../../../assets/images/btn_excel.png';
+import excelBtn from "../../../../assets/images/btn_excel.png";
 import { addComma } from "../../../../lib/addComma";
 import GridCellButton from "../../GridCellButton";
 import AdminUserAttendanceModal from "../AdminUserAttendanceModal/AdminUserAttendanceModal";
@@ -153,10 +163,18 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     onCancel();
   };
 
+  // Excel Download
   const handleExcelDownload = async () => {
     try {
       setIsLoading(true);
-      const { data: users } = await api.listUserForExcel();
+
+      const { department, keyword } = form.getFieldsValue();
+      const { data: users } = await api.listUserForExcel({
+        query: {
+          ...(keyword && { name: keyword }),
+          ...(department && { department }),
+        },
+      });
       const excelDatas = _.map(users, (user) => {
         return {
           부서: user.department,
@@ -166,8 +184,13 @@ const AdminSearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
       });
       const worksheet = xlsx.utils.json_to_sheet(excelDatas);
       const workbook = xlsx.utils.book_new();
+      const departmentValue = department ? department : "전체";
+      const fileName = `온라인_출석명단_${departmentValue}_${moment().format(
+        "YYYYMMDDHHmm"
+      )}.xlsx`;
+
       xlsx.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      xlsx.writeFile(workbook, `온라인_출석명단_${moment().format("YYYYMMDDHHmm")}.xlsx`);
+      xlsx.writeFile(workbook, fileName);
     } catch (error) {
       Modal.error({
         title: "엑셀 다운로드 실패",
