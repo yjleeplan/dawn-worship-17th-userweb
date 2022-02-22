@@ -1,5 +1,14 @@
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Comment, Input, List, message, Row, Skeleton } from "antd";
+import {
+  Avatar,
+  Button,
+  Card,
+  Comment,
+  Input,
+  List,
+  message,
+  Skeleton,
+} from "antd";
 import _ from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -109,15 +118,9 @@ const Comments = ({ setIsLoading }) => {
       <Card
         className="comment-add-wrap"
         bordered={false}
-        title={
-          <>
-            <Row>"특별새벽부흥회를 통해 받은 은혜를</Row>
-            <Row>나눠주세요!"</Row>
-          </>
-        }
+        title={`"특별새벽부흥회를 통해 받은 은혜를 나눠주세요!"`}
       >
         <Comment
-          // avatar={<Avatar icon={<UserOutlined />} alt="홍길동" />}
           content={
             <>
               <Input
@@ -147,37 +150,44 @@ const Comments = ({ setIsLoading }) => {
           }
         />
       </Card>
-      <div className="comment-list-wrap" id="infinite-scroll-comment">
-        <InfiniteScroll
-          dataLength={commentData.comments.length}
-          next={handleListComment}
-          hasMore={commentData.comments.length < commentData.totalCount}
-          loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
-          scrollableTarget="infinite-scroll-comment"
-        >
-          <List
-            dataSource={commentData.comments}
-            header={`${commentData.totalCount} 댓글`}
-            itemLayout="horizontal"
-            renderItem={(item) => (
-              <Comment
-                author={item.user_name}
-                avatar={
-                  <Avatar
-                    icon={<UserOutlined />}
-                    style={{
-                      backgroundColor:
-                        colorCodeList[_.random(0, colorCodeList.length)],
-                    }}
-                  />
-                }
-                content={<p>{item.content}</p>}
-                datetime={moment(item.created_at).format("YYYY-MM-DD HH:mm:ss")}
-              />
-            )}
-          />
-        </InfiniteScroll>
-      </div>
+      <Card
+        className="comment-list-wrap"
+        bordered={false}
+        title={`${commentData.totalCount} 댓글`}
+      >
+        <div id="infinite-scroll-comment">
+          <InfiniteScroll
+            dataLength={commentData.comments.length}
+            next={handleListComment}
+            hasMore={commentData.comments.length < commentData.totalCount}
+            loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+            scrollableTarget="infinite-scroll-comment"
+          >
+            <List
+              dataSource={commentData.comments}
+              itemLayout="horizontal"
+              renderItem={(item) => (
+                <Comment
+                  author={item.user_name}
+                  avatar={
+                    <Avatar
+                      icon={<UserOutlined />}
+                      style={{
+                        backgroundColor:
+                          colorCodeList[_.random(0, colorCodeList.length)],
+                      }}
+                    />
+                  }
+                  content={<p>{item.content}</p>}
+                  datetime={moment(item.created_at).format(
+                    "YYYY-MM-DD HH:mm:ss"
+                  )}
+                />
+              )}
+            />
+          </InfiniteScroll>
+        </div>
+      </Card>
     </div>
   );
 };
