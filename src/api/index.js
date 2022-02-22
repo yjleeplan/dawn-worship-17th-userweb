@@ -16,8 +16,10 @@ export const listUser = ({ query }) => {
   });
 };
 
-export const listUserForExcel = () => {
-  return request.get("/excel/users");
+export const listUserForExcel = ({ query }) => {
+  return request.get("/excel/users", {
+    params: query,
+  });
 };
 
 export const selectUser = ({ path }) => {
