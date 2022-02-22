@@ -1,8 +1,9 @@
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Comment, Input, List, message, Row } from "antd";
+import { Avatar, Button, Card, Comment, Input, List, message, Row, Skeleton } from "antd";
 import _ from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import * as api from "../../api";
 
 const Comments = ({ setIsLoading }) => {
@@ -28,52 +29,33 @@ const Comments = ({ setIsLoading }) => {
     comments: [],
     value: "",
   });
-  // const [commentOptions, setCommentOptions] = useState({
-  //   offset: 0,
-  //   limit: 10,
-  // });
+  const [commentOptions, setCommentOptions] = useState({
+    offset: 0,
+    limit: 10,
+  });
 
   /** Effect */
   useEffect(() => {
+    setIsLoading(true);
     handleListComment();
+    setIsLoading(false);
     // eslint-disable-next-line
   }, []);
-
-  // 댓글 스크롤 이벤트
-  // const handleScroll = () => {
-  //   console.log("scrolled");
-  // };
 
   // 댓글 목록 조회
   const handleListComment = async () => {
     try {
-      setIsLoading(true);
       const { data: comments } = await api.listComment({
-        query: {
-          offset: 0,
-          limit: 30,
-        },
-      });
-      const newData = _.map(comments.items, (item) => {
-        return {
-          author: item.user_name,
-          avatar: (
-            <Avatar
-              icon={<UserOutlined />}
-              style={{
-                backgroundColor:
-                  colorCodeList[_.random(0, colorCodeList.length)],
-              }}
-            />
-          ),
-          content: <p>{item.content}</p>,
-          datetime: moment(item.created_at).format("YYYY-MM-DD HH:mm:ss"),
-        };
+        query: commentOptions,
       });
       setCommentData({
         value: "",
-        comments: newData,
+        comments: [...commentData.comments, ...comments.items],
         totalCount: comments.total,
+      });
+      setCommentOptions({
+        ...commentOptions,
+        offset: commentOptions.offset + commentOptions.limit,
       });
     } catch (error) {
       message.error(
@@ -81,8 +63,6 @@ const Comments = ({ setIsLoading }) => {
           ? `${error.response.data.code}, ${error.response.data.message}`
           : "댓글 목록 조회 실패"
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -167,13 +147,36 @@ const Comments = ({ setIsLoading }) => {
           }
         />
       </Card>
-      <div className="comment-list-wrap">
-        <List
-          dataSource={commentData.comments}
-          header={`${commentData.totalCount} 댓글`}
-          itemLayout="horizontal"
-          renderItem={(props) => <Comment {...props} />}
-        />
+      <div className="comment-list-wrap" id="infinite-scroll-comment">
+        <InfiniteScroll
+          dataLength={commentData.comments.length}
+          next={handleListComment}
+          hasMore={commentData.comments.length < commentData.totalCount}
+          loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+          scrollableTarget="infinite-scroll-comment"
+        >
+          <List
+            dataSource={commentData.comments}
+            header={`${commentData.totalCount} 댓글`}
+            itemLayout="horizontal"
+            renderItem={(item) => (
+              <Comment
+                author={item.user_name}
+                avatar={
+                  <Avatar
+                    icon={<UserOutlined />}
+                    style={{
+                      backgroundColor:
+                        colorCodeList[_.random(0, colorCodeList.length)],
+                    }}
+                  />
+                }
+                content={<p>{item.content}</p>}
+                datetime={moment(item.created_at).format("YYYY-MM-DD HH:mm:ss")}
+              />
+            )}
+          />
+        </InfiniteScroll>
       </div>
     </div>
   );
