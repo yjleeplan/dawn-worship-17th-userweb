@@ -11,6 +11,10 @@ export const IS_COMPLETE = (attendanceYn) => {
     return "COMPLETE";
   } else if (attendanceYn === "B") {
     return "BONUS";
+  } else if (attendanceYn === "B1") {
+    return "BONUS";
+  } else if (attendanceYn === "B2") {
+    return "BONUS";
   } else {
     return false;
   }

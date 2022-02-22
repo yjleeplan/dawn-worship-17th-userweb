@@ -126,7 +126,7 @@ const Stamp = ({
 
           await api.updatedAttendance({
             path: { attendance_id: attendanceId },
-            data: { [`day${Number(index) + 1}`]: "B" },
+            data: { [`day${Number(index) + 1}`]: "B2" },
           });
 
           onSelectUser();
