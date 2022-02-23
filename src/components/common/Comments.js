@@ -11,7 +11,7 @@ import {
 } from "antd";
 import _ from "lodash";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import * as api from "../../api";
 
@@ -42,35 +42,65 @@ const Comments = ({ setIsLoading }) => {
     offset: 0,
     limit: 10,
   });
+  const commentListRef = useRef("");
 
   /** Effect */
   useEffect(() => {
     setIsLoading(true);
-    handleListComment();
+    handleListComment({ offset: 0 });
     setIsLoading(false);
     // eslint-disable-next-line
   }, []);
 
   // 댓글 목록 조회
-  const handleListComment = async () => {
+  const handleListComment = async ({ offset }) => {
     try {
       const { data: comments } = await api.listComment({
-        query: commentOptions,
+        query: { offset, limit: commentOptions.limit },
+      });
+      const newData = _.map(comments.items, (item) => {
+        return {
+          author: item.user_name,
+          avatar: (
+            <Avatar
+              icon={<UserOutlined />}
+              style={{
+                backgroundColor:
+                  colorCodeList[_.random(0, colorCodeList.length)],
+              }}
+            />
+          ),
+          content: <p>{item.content}</p>,
+          datetime: moment(item.created_at).format("YYYY-MM-DD HH:mm:ss"),
+        };
       });
       setCommentData({
-        value: "",
-        comments: [...commentData.comments, ...comments.items],
+        ...commentData,
+        comments: [...((offset && commentData.comments) || []), ...newData],
         totalCount: comments.total,
-      });
-      setCommentOptions({
-        ...commentOptions,
-        offset: commentOptions.offset + commentOptions.limit,
       });
     } catch (error) {
       message.error(
         error.response
           ? `${error.response.data.code}, ${error.response.data.message}`
           : "댓글 목록 조회 실패"
+      );
+    }
+  };
+
+  const handleScroll = async () => {
+    try {
+      const newOffset = commentOptions.offset + commentOptions.limit;
+      await handleListComment({ offset: newOffset });
+      setCommentOptions({
+        ...commentOptions,
+        offset: newOffset,
+      });
+    } catch (error) {
+      message.error(
+        error.response
+          ? `${error.response.data.code}, ${error.response.data.message}`
+          : "스크롤 실패"
       );
     }
   };
@@ -87,16 +117,25 @@ const Comments = ({ setIsLoading }) => {
     }
 
     try {
+      setIsLoading(true);
+      commentListRef.current.scrollTop = 0;
       await api.createComment({
         data: { user_name: commentUserName, content: commentData.value },
       });
-      await handleListComment();
+      await handleListComment({ offset: 0 });
+      setCommentUserName("");
+      setCommentData({
+        ...commentData,
+        value: "",
+      });
     } catch (error) {
       message.error(
         error.response
           ? `${error.response.data.code}, ${error.response.data.message}`
           : "댓글 등록 실패"
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -155,10 +194,10 @@ const Comments = ({ setIsLoading }) => {
         bordered={false}
         title={`${commentData.totalCount} 댓글`}
       >
-        <div id="infinite-scroll-comment">
+        <div id="infinite-scroll-comment" ref={commentListRef}>
           <InfiniteScroll
             dataLength={commentData.comments.length}
-            next={handleListComment}
+            next={handleScroll}
             hasMore={commentData.comments.length < commentData.totalCount}
             loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
             scrollableTarget="infinite-scroll-comment"
@@ -166,24 +205,7 @@ const Comments = ({ setIsLoading }) => {
             <List
               dataSource={commentData.comments}
               itemLayout="horizontal"
-              renderItem={(item) => (
-                <Comment
-                  author={item.user_name}
-                  avatar={
-                    <Avatar
-                      icon={<UserOutlined />}
-                      style={{
-                        backgroundColor:
-                          colorCodeList[_.random(0, colorCodeList.length)],
-                      }}
-                    />
-                  }
-                  content={<p>{item.content}</p>}
-                  datetime={moment(item.created_at).format(
-                    "YYYY-MM-DD HH:mm:ss"
-                  )}
-                />
-              )}
+              renderItem={(props) => <Comment {...props} />}
             />
           </InfiniteScroll>
         </div>
