@@ -33,10 +33,10 @@ const Comments = ({ setIsLoading }) => {
 
   /** State */
   const [commentUserName, setCommentUserName] = useState("");
+  const [commentContent, setCommentContent] = useState("");
   const [commentData, setCommentData] = useState({
     totalCount: 0,
     comments: [],
-    value: "",
   });
   const [commentOptions, setCommentOptions] = useState({
     offset: 0,
@@ -88,6 +88,7 @@ const Comments = ({ setIsLoading }) => {
     }
   };
 
+  // 댓글 스크롤
   const handleScroll = async () => {
     try {
       const newOffset = commentOptions.offset + commentOptions.limit;
@@ -111,22 +112,26 @@ const Comments = ({ setIsLoading }) => {
       message.warning("이름을 입력해주세요.");
       return;
     }
-    if (!commentData.value) {
+    if (!commentContent) {
       message.warning("댓글을 입력해주세요.");
       return;
     }
 
     try {
       setIsLoading(true);
+
       commentListRef.current.scrollTop = 0;
+
       await api.createComment({
-        data: { user_name: commentUserName, content: commentData.value },
+        data: { user_name: commentUserName, content: commentContent },
       });
       await handleListComment({ offset: 0 });
+
       setCommentUserName("");
-      setCommentData({
-        ...commentData,
-        value: "",
+      setCommentContent("");
+      setCommentOptions({
+        ...commentOptions,
+        offset: 0,
       });
     } catch (error) {
       message.error(
@@ -146,10 +151,7 @@ const Comments = ({ setIsLoading }) => {
 
   // 댓글 내용 Change
   const handleCommentChange = (e) => {
-    setCommentData({
-      ...commentData,
-      value: e.target.value,
-    });
+    setCommentContent(e.target.value);
   };
 
   return (
@@ -173,7 +175,7 @@ const Comments = ({ setIsLoading }) => {
                 className="comment-content"
                 rows={4}
                 onChange={handleCommentChange}
-                value={commentData.value}
+                value={commentContent}
                 placeholder="댓글을 입력해주세요"
               />
               <Button
