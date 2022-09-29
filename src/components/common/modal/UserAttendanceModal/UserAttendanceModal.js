@@ -104,7 +104,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
           <Row>
             {!_.isEmpty(userDetail) &&
               _.map(userDetail.attendance.daylist, (item, index) => {
-                if (index > 5) {
+                if (5 < index && index < 12) {
                   return (
                     <Col span={4} className="stamp-col" key={index}>
                       <Stamp
