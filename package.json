@@ -1,19 +1,16 @@
 {
   "name": "dawn-worship-17th-userweb",
   "version": "0.1.0",
-  "repository": "https://github.com/chahoo-limited/doorlock-multifamily-userweb-utop-yeosu.git",
+  "repository": "https://github.com/yjleeplan/dawn-worship-17th-userweb.git",
   "private": true,
   "scripts": {
     "dev": "cp-cli ./config/.env.dev ./.env",
-    "staging": "cp-cli ./config/.env.staging ./.env",
     "prod": "cp-cli ./config/.env.prod ./.env",
     "build": "npm run sync-assets && react-scripts build",
     "build-dev": "npm run dev && npm run build",
-    "build-staging": "npm run staging && npm run build",
     "build-prod": "npm run prod && npm run build",
     "start": "react-scripts start",
     "start-dev": "npm run dev && npm-run-all -p sync-assets watch-assets start",
-    "start-staging": "npm run staging && npm-run-all -p sync-assets watch-assets start",
     "start-prod": "npm run prod && npm-run-all -p sync-assets watch-assets start",
     "sync-assets": "cp -r ./src/assets/ ./public/",
     "watch-assets": "chokidar \"src/assets\" -c \"npm run sync-assets\""
