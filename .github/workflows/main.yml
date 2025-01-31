@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - dev
-      - staging
       - master
 
 jobs:
@@ -17,14 +16,23 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          node-version: "16"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies
         run: npm install
@@ -41,37 +49,6 @@ jobs:
           aws --region "ap-northeast-2" s3 sync ./build s3://${{ secrets.S3_BUCKET_DEV }} --delete --acl public-read --exclude ".git/*" --exclude "*.DS_Store*"
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DIST_ID_DEV }} --paths /index.html
 
-  deploy-staging:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/staging'
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build-staging
-
-      - name: Deploy aws resources
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "ap-northeast-2"
-        run: |
-          aws --region "ap-northeast-2" s3 sync ./build s3://${{ secrets.S3_BUCKET_STAGING }} --delete --acl public-read --exclude ".git/*" --exclude "*.DS_Store*"
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DIST_ID_STAGING }} --paths /index.html
-
   deploy-production:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
@@ -79,14 +56,23 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          node-version: "16"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies
         run: npm install

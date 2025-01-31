@@ -1,6 +1,5 @@
 import { Col, Image, Row } from "antd";
-import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import iconAttendance from "../../../assets/images/icon_attendance.png";
 import iconPicture from "../../../assets/images/icon_picture.png";
 import iconUserAdd from "../../../assets/images/icon_user_add.png";
@@ -10,19 +9,11 @@ import Comments from "../../common/Comments";
 import SearchAttendanceModal from "../../common/modal/SearchAttendanceModal/SearchAttendanceModal";
 import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
 
-const Main = ({ history, setIsLoading }) => {
+const Main = ({ setIsLoading }) => {
   /** State */
   const [userAddModalVisible, setUserAddModalVisible] = useState(false);
   const [searchAttendanceModalVisible, setSearchAttendanceModalVisible] =
     useState(false);
-
-  useEffect(() => {
-    const { hostname } = window.location;
-    if (_.includes(hostname, "dev")) {
-      window.location.replace("https://dawn-worship-17th.saeum.or.kr/");
-    }
-    // eslint-disable-next-line
-  }, []);
 
   // 사용자 등록 모달 오픈
   const handleUserAddModalOpen = () => {
