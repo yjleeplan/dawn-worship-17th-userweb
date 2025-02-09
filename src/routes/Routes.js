@@ -4,6 +4,7 @@ import ScrollToTop from "../components/common/ScrollToTop";
 import MainLayout from "../components/layouts/MainLayout/MainLayout";
 import RankLayout from "../components/layouts/RankLayout/RankLayout";
 import Admin from "../components/pages/Admin/Admin";
+import AdminSetting from "../components/pages/Admin/AdminSetting";
 import Main from "../components/pages/Main/Main";
 import Rank from "../components/pages/Rank/Rank";
 
@@ -25,8 +26,17 @@ const Routes = () => {
           exact
           path="/admin"
           render={(props) => (
-            <MainLayout isAdmin={true}>
+            <MainLayout isAdmin={true} buttonType="home">
               <Admin {...props} />
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path="/admin/setting"
+          render={(props) => (
+            <MainLayout isAdmin={true} buttonType="setting">
+              <AdminSetting {...props} />
             </MainLayout>
           )}
         />
