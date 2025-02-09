@@ -4,7 +4,7 @@ export const ATTENDANCE_END_HOUR = 8;
 export const BONUS_START_HOUR = 20;
 export const BONUS_END_HOUR = 24;
 
-export const BONUS_DAYS = [16, 23];
+export const BONUS_DAYS = [19, 26];
 
 export const IS_COMPLETE = (attendanceYn) => {
   if (attendanceYn === "Y") {

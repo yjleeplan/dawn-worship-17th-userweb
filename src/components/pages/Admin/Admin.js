@@ -36,12 +36,12 @@ const Admin = ({ setIsLoading }) => {
 
   // 영상 링크
   const handleVideoClick = () => {
-    window.open("https://youtube.com/playlist?list=PLFdkyNDzHdpNVq4q7eDzTQcrHnkVvRs0R");
+    window.open("https://www.youtube.com/playlist?list=PLFdkyNDzHdpOhsmcXQ_xyz37py0Lfl4Hg");
   };
 
   // 사진 링크
   const handlePictureClick = () => {
-    window.open("http://naver.me/FUGfHWej");
+    window.open("https://m.post.naver.com/my/series/detail.naver?seriesNo=744663&memberNo=28453879");
   };
 
   return (

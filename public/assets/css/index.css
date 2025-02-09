@@ -58,6 +58,7 @@ body,
   font-size: 14px;
   padding-top: 3px;
   height: 29px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 
 .user-attendance-modal-icon {
@@ -540,3 +541,76 @@ body,
   width: fit-content;
 }
 /* Rank Layout */
+
+/* Admin Setting */
+#admin-setting-wrap {
+  padding: 30px 0;
+}
+
+#admin-setting-wrap #admin-select-wrap .ant-select {
+  width: 100%;
+}
+
+#admin-setting-wrap #admin-select-wrap .rc-virtual-list-holder {
+  min-height: 300px !important;
+}
+
+#admin-setting-wrap #admin-select-wrap .rc-virtual-list-scrollbar {
+  display: none;
+}
+
+#admin-setting-wrap .point-wrap {
+  margin: 40px 0;
+  text-align: center;
+  font-size: 60px;
+  color: #fff;
+}
+
+#admin-setting-wrap .button-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+/* Admin Setting */
+
+/* 3D Button */
+.button-3d {
+  position: relative;
+  display: inline-block;
+  font-size: 22px;
+  padding: 20px 40px;
+  color: white;
+  margin: 20px 10px 10px;
+  border-radius: 6px;
+  text-align: center;
+  transition: top 0.01s linear;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.button-3d.blue:hover {
+  background-color: #699dd1;
+}
+.button-3d.cyan:hover {
+  background-color: #82d1e3;
+}
+
+.button-3d:active {
+  top: 9px;
+}
+
+.button-3d.blue {
+  background-color: #6da2d9;
+  box-shadow: 0 0 0 1px #6698cb inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgba(110, 164, 219, 0.7),
+    0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+.button-3d.blue:active {
+  box-shadow: 0 0 0 1px #6191c2 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+.button-3d.cyan {
+  background-color: #7fccde;
+  box-shadow: 0 0 0 1px #7fccde inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 rgba(102, 164, 178, 0.6),
+    0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+.button-3d.cyan:active {
+  box-shadow: 0 0 0 1px #7fccde inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+/* 3D Button */
