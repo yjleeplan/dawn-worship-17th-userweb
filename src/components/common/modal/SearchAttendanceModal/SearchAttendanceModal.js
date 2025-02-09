@@ -48,8 +48,7 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
   /** State */
   const [resultList, setResultList] = useState([]);
   const [selectedRowData, setSelectedRowData] = useState({});
-  const [userAttendanceModalVisible, setUserAttendanceModalVisible] =
-    useState(false);
+  const [userAttendanceModalVisible, setUserAttendanceModalVisible] = useState(false);
 
   // 검색결과 그리드 Height
   const getAgGridHeight = () => {
@@ -93,9 +92,7 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     } catch (error) {
       Modal.error({
         title: "검색 실패",
-        content: error.response
-          ? `${error.response.data.code}, ${error.response.data.message}`
-          : error.message,
+        content: error.response ? `${error.response.data.code}, ${error.response.data.message}` : error.message,
         okText: "확인",
       });
     } finally {
@@ -122,33 +119,22 @@ const SearchAttendanceModal = ({ visible, onCancel, setIsLoading }) => {
     <Modal
       wrapClassName="search-attendance-modal-wrap"
       title="출석 체크"
-      visible={visible}
+      open={visible}
       onCancel={handleCancel}
       footer={false}
       maskClosable={false}
       getContainer={document.getElementById("searchAttendanceModal")}
       destroyOnClose
     >
-      <Form
-        form={form}
-        name="form"
-        initialValues={initialValues}
-        onFinish={onFinish}
-      >
+      <Form form={form} name="form" initialValues={initialValues} onFinish={onFinish}>
         <div className="search-wrap">
           <Form.Item name="keyword">
-            <Input
-              placeholder="이름을 입력해주세요"
-              suffix={<SearchOutlined onClick={handleSearch} />}
-            />
+            <Input placeholder="이름을 입력해주세요" suffix={<SearchOutlined onClick={handleSearch} />} />
           </Form.Item>
         </div>
         <div className="grid-wrap">
           {!_.isEmpty(resultList) && (
-            <div
-              className="ag-theme-alpine"
-              style={{ height: getAgGridHeight() }}
-            >
+            <div className="ag-theme-alpine" style={{ height: getAgGridHeight() }}>
               <AgGridReact
                 columnDefs={columnDefs}
                 rowData={resultList}

@@ -3,17 +3,12 @@ import _ from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../../api";
-import title from "../../../../assets/images/title.png";
+import title from "../../../../assets/images/attendance_title.png";
 import AdminStamp from "../../AdminStamp";
 
 const { Text } = Typography;
 
-const AdminUserAttendanceModal = ({
-  visible,
-  onCancel,
-  userInfo,
-  setIsLoading,
-}) => {
+const AdminUserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
   /** State */
   const [userDetail, setUserDetail] = useState([]);
   const [today, setToday] = useState(0);
@@ -45,9 +40,7 @@ const AdminUserAttendanceModal = ({
       setUserDetail(user);
     } catch (error) {
       message.error(
-        error.response
-          ? `${error.response.data.code}, ${error.response.data.message}`
-          : "사용자 조회 실패"
+        error.response ? `${error.response.data.code}, ${error.response.data.message}` : "사용자 조회 실패"
       );
     } finally {
       setIsLoading(false);
@@ -63,7 +56,7 @@ const AdminUserAttendanceModal = ({
     <Modal
       wrapClassName="user-attendance-modal-wrap"
       title=""
-      visible={visible}
+      open={visible}
       onCancel={handleCancel}
       footer={false}
       maskClosable={false}
@@ -72,13 +65,12 @@ const AdminUserAttendanceModal = ({
     >
       <Row className="user-attendance-modal-title">
         <Col span={24}>
-          <Image width={192} height={160} src={title} preview={false} />
+          <Image width={300} height={160} src={title} preview={false} />
         </Col>
       </Row>
       <Row className="user-attendance-modal-info">
         <Col span={24}>
-          <Text className="user-name">{userDetail.name}</Text>{" "}
-          <Text>님의 출석판입니다.</Text>
+          <Text className="user-name">{userDetail.name}</Text> <Text>님의 출석판입니다.</Text>
         </Col>
       </Row>
       <Row className="user-attendance-modal-attendance">
@@ -109,7 +101,7 @@ const AdminUserAttendanceModal = ({
           <Row>
             {!_.isEmpty(userDetail) &&
               _.map(userDetail.attendance.daylist, (item, index) => {
-                if (index > 5) {
+                if (index > 5 && index < 12) {
                   return (
                     <Col span={4} className="stamp-col" key={index}>
                       <AdminStamp

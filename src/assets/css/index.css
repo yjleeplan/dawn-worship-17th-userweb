@@ -90,11 +90,7 @@ body,
   box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 
-#main-layout
-  #content
-  .search-wrap
-  .ant-input-affix-wrapper
-  .anticon.anticon-search {
+#main-layout #content .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
   color: #4285f4;
   font-size: 22px;
 }
@@ -178,9 +174,11 @@ body,
 
 .ant-modal-wrap.user-attendance-modal-wrap .ant-modal-body {
   min-height: 500px;
-  background-image: url(/src/assets/images/attendance_bg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #fff;
+  border-radius: 10px;
+  /* background-image: url(/src/assets/images/attendance_bg.png); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
 }
 
 .user-attendance-modal-title {
@@ -198,14 +196,14 @@ body,
 }
 
 .user-attendance-modal-info .user-name {
-  color: #6f2629;
+  color: #5d70a0;
   font-size: 18px;
   font-weight: bold;
 }
 
 .user-attendance-modal-attendance {
   /* height: 200px; */
-  background-color: #cebb9c;
+  background-color: #f1f1f1;
   border-radius: 6px;
   padding: 10px 2px;
 }
@@ -416,19 +414,14 @@ body,
   text-align: center;
 }
 
-.ant-modal-wrap.search-attendance-modal-wrap
-  .search-wrap
-  .ant-input-affix-wrapper {
+.ant-modal-wrap.search-attendance-modal-wrap .search-wrap .ant-input-affix-wrapper {
   height: 40px;
   border-radius: 20px;
   /* max-width: 500px; */
   /* box-shadow: 0 2px 4px rgb(0 0 0 / 30%); */
 }
 
-.ant-modal-wrap.search-attendance-modal-wrap
-  .search-wrap
-  .ant-input-affix-wrapper
-  .anticon.anticon-search {
+.ant-modal-wrap.search-attendance-modal-wrap .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
   color: #4285f4;
   font-size: 22px;
 }
@@ -490,3 +483,31 @@ body,
   -moz-transform: translate3d(0, 0, 0);
 }
 /* Admin */
+
+/* Rank Layout */
+#rank-layout {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  background-image: url(/src/assets/images/rank_background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+}
+
+#rank-layout .lane {
+  position: absolute;
+  width: 100%;
+}
+
+#rank-layout .player {
+  width: fit-content;
+}
+/* Rank Layout */
