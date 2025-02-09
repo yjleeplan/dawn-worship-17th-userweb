@@ -28,30 +28,22 @@ import {
   IS_NOT_COMPLETE,
 } from "../../context/Context";
 
-const Stamp = ({
-  index,
-  attendanceYn,
-  attendanceId,
-  onSelectUser,
-  setIsLoading,
-  today,
-  hour,
-}) => {
+const Stamp = ({ index, attendanceYn, attendanceId, onSelectUser, setIsLoading, today, hour }) => {
   // 금일자 컬럼 Formatter
   const todayFormatter = (today) => {
     return {
-      14: "day1",
-      15: "day2",
-      16: "day3",
-      17: "day4",
-      18: "day5",
-      19: "day6",
-      21: "day7",
-      22: "day8",
-      23: "day9",
-      24: "day10",
-      25: "day11",
-      26: "day12",
+      17: "day1",
+      18: "day2",
+      19: "day3",
+      20: "day4",
+      21: "day5",
+      22: "day6",
+      24: "day7",
+      25: "day8",
+      26: "day9",
+      27: "day10",
+      28: "day11",
+      1: "day12",
     }[today];
   };
 
@@ -80,11 +72,7 @@ const Stamp = ({
   const stampType = () => {
     let type = IS_COMPLETE(attendanceYn);
     if (!type) {
-      if (
-        _.includes(BONUS_DAYS, today) &&
-        BONUS_START_HOUR <= hour &&
-        hour < BONUS_END_HOUR
-      ) {
+      if (_.includes(BONUS_DAYS, today) && BONUS_START_HOUR <= hour && hour < BONUS_END_HOUR) {
         type = IS_BONUS(index, today);
       } else {
         type = IS_NOT_COMPLETE(index, today);
@@ -117,11 +105,7 @@ const Stamp = ({
   const handleUpdatedAttendance = async () => {
     try {
       if (isUpdateEnable()) {
-        if (
-          _.includes(BONUS_DAYS, today) &&
-          BONUS_START_HOUR <= hour &&
-          hour < BONUS_END_HOUR
-        ) {
+        if (_.includes(BONUS_DAYS, today) && BONUS_START_HOUR <= hour && hour < BONUS_END_HOUR) {
           setIsLoading(true);
 
           await api.updatedAttendance({
@@ -148,9 +132,7 @@ const Stamp = ({
         }
       }
     } catch (error) {
-      message.error(
-        error.response ? `${error.response.data.message}` : "출석 실패"
-      );
+      message.error(error.response ? `${error.response.data.message}` : "출석 실패");
     } finally {
       setIsLoading(false);
     }

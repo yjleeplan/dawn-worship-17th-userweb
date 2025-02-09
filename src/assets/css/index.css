@@ -174,9 +174,11 @@ body,
 
 .ant-modal-wrap.user-attendance-modal-wrap .ant-modal-body {
   min-height: 500px;
-  background-image: url(/src/assets/images/attendance_bg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #fff;
+  border-radius: 10px;
+  /* background-image: url(/src/assets/images/attendance_bg.png); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
 }
 
 .user-attendance-modal-title {
@@ -194,14 +196,14 @@ body,
 }
 
 .user-attendance-modal-info .user-name {
-  color: #6f2629;
+  color: #5d70a0;
   font-size: 18px;
   font-weight: bold;
 }
 
 .user-attendance-modal-attendance {
   /* height: 200px; */
-  background-color: #cebb9c;
+  background-color: #f1f1f1;
   border-radius: 6px;
   padding: 10px 2px;
 }

@@ -3,7 +3,7 @@ import _ from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../../api";
-import title from "../../../../assets/images/title.png";
+import title from "../../../../assets/images/attendance_title.png";
 import Stamp from "../../Stamp";
 
 const { Text } = Typography;
@@ -40,9 +40,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
       setUserDetail(user);
     } catch (error) {
       message.error(
-        error.response
-          ? `${error.response.data.code}, ${error.response.data.message}`
-          : "사용자 조회 실패"
+        error.response ? `${error.response.data.code}, ${error.response.data.message}` : "사용자 조회 실패"
       );
     } finally {
       setIsLoading(false);
@@ -58,7 +56,7 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
     <Modal
       wrapClassName="user-attendance-modal-wrap"
       title=""
-      visible={visible}
+      open={visible}
       onCancel={handleCancel}
       footer={false}
       maskClosable={false}
@@ -67,13 +65,12 @@ const UserAttendanceModal = ({ visible, onCancel, userInfo, setIsLoading }) => {
     >
       <Row className="user-attendance-modal-title">
         <Col span={24}>
-          <Image width={192} height={160} src={title} preview={false} />
+          <Image width={300} height={160} src={title} preview={false} />
         </Col>
       </Row>
       <Row className="user-attendance-modal-info">
         <Col span={24}>
-          <Text className="user-name">{userDetail.name}</Text>{" "}
-          <Text>님의 출석판입니다.</Text>
+          <Text className="user-name">{userDetail.name}</Text> <Text>님의 출석판입니다.</Text>
         </Col>
       </Row>
       <Row className="user-attendance-modal-attendance">
