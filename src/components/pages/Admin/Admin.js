@@ -12,8 +12,7 @@ import UserAddModal from "../../common/modal/UserAddModal/UserAddModal";
 const Admin = ({ setIsLoading }) => {
   /** State */
   const [userAddModalVisible, setUserAddModalVisible] = useState(false);
-  const [searchAttendanceModalVisible, setSearchAttendanceModalVisible] =
-    useState(false);
+  const [searchAttendanceModalVisible, setSearchAttendanceModalVisible] = useState(false);
 
   // 사용자 등록 모달 오픈
   const handleUserAddModalOpen = () => {
@@ -37,9 +36,7 @@ const Admin = ({ setIsLoading }) => {
 
   // 영상 링크
   const handleVideoClick = () => {
-    window.open(
-      "https://youtube.com/playlist?list=PLFdkyNDzHdpNVq4q7eDzTQcrHnkVvRs0R"
-    );
+    window.open("https://youtube.com/playlist?list=PLFdkyNDzHdpNVq4q7eDzTQcrHnkVvRs0R");
   };
 
   // 사진 링크
@@ -51,52 +48,24 @@ const Admin = ({ setIsLoading }) => {
     <>
       <Row className="user-attendance-modal-title">
         <Col span={24}>
-          <Image width={192} height={160} src={title} preview={false} />
+          <Image width={300} height={160} src={title} preview={false} />
         </Col>
       </Row>
       <Row className="user-attendance-modal-icon">
         <Col span={6} onClick={handleUserAddModalOpen} className="icon-wrap">
-          <Image
-            width={"80%"}
-            height={"100%"}
-            src={iconUserAdd}
-            preview={false}
-          />
+          <Image width={"80%"} height={"100%"} src={iconUserAdd} preview={false} />
         </Col>
-        <Col
-          span={6}
-          onClick={handleSearchAttendanceModalOpen}
-          className="icon-wrap"
-        >
-          <Image
-            width={"80%"}
-            height={"100%"}
-            src={iconAttendance}
-            preview={false}
-          />
+        <Col span={6} onClick={handleSearchAttendanceModalOpen} className="icon-wrap">
+          <Image width={"80%"} height={"100%"} src={iconAttendance} preview={false} />
         </Col>
         <Col span={6} onClick={handleVideoClick} className="icon-wrap">
-          <Image
-            width={"80%"}
-            height={"100%"}
-            src={iconVideo}
-            preview={false}
-          />
+          <Image width={"80%"} height={"100%"} src={iconVideo} preview={false} />
         </Col>
         <Col span={6} onClick={handlePictureClick} className="icon-wrap">
-          <Image
-            width={"80%"}
-            height={"100%"}
-            src={iconPicture}
-            preview={false}
-          />
+          <Image width={"80%"} height={"100%"} src={iconPicture} preview={false} />
         </Col>
         <div id="userAddModal">
-          <UserAddModal
-            visible={userAddModalVisible}
-            onCancel={handleUserAddModalClose}
-            setIsLoading={setIsLoading}
-          />
+          <UserAddModal visible={userAddModalVisible} onCancel={handleUserAddModalClose} setIsLoading={setIsLoading} />
         </div>
         <div id="searchAttendanceModal">
           <AdminSearchAttendanceModal
