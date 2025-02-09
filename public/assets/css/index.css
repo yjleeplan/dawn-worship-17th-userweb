@@ -90,11 +90,7 @@ body,
   box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 
-#main-layout
-  #content
-  .search-wrap
-  .ant-input-affix-wrapper
-  .anticon.anticon-search {
+#main-layout #content .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
   color: #4285f4;
   font-size: 22px;
 }
@@ -416,19 +412,14 @@ body,
   text-align: center;
 }
 
-.ant-modal-wrap.search-attendance-modal-wrap
-  .search-wrap
-  .ant-input-affix-wrapper {
+.ant-modal-wrap.search-attendance-modal-wrap .search-wrap .ant-input-affix-wrapper {
   height: 40px;
   border-radius: 20px;
   /* max-width: 500px; */
   /* box-shadow: 0 2px 4px rgb(0 0 0 / 30%); */
 }
 
-.ant-modal-wrap.search-attendance-modal-wrap
-  .search-wrap
-  .ant-input-affix-wrapper
-  .anticon.anticon-search {
+.ant-modal-wrap.search-attendance-modal-wrap .search-wrap .ant-input-affix-wrapper .anticon.anticon-search {
   color: #4285f4;
   font-size: 22px;
 }
@@ -490,3 +481,31 @@ body,
   -moz-transform: translate3d(0, 0, 0);
 }
 /* Admin */
+
+/* Rank Layout */
+#rank-layout {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  background-image: url(/src/assets/images/rank_background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+}
+
+#rank-layout .lane {
+  position: absolute;
+  width: 100%;
+}
+
+#rank-layout .player {
+  width: fit-content;
+}
+/* Rank Layout */
