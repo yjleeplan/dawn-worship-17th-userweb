@@ -2,7 +2,7 @@ import { Col, Image, Row, Tag } from "antd";
 import React from "react";
 import logo from "../../../assets/images/logo.png";
 
-const Header = ({ isAdmin }) => {
+const Header = ({ isAdmin, buttonType }) => {
   return (
     <div id="header">
       {isAdmin ? (
@@ -11,7 +11,16 @@ const Header = ({ isAdmin }) => {
             <Image width={102} height={25} src={logo} preview={false} />
           </Col>
           <Col span={6} className="header-right">
-            <Tag color="#cd201f">관리자 모드</Tag>
+            {buttonType === "home" && (
+              <Tag color="#cd201f" onClick={() => (window.location.href = "/admin/setting")}>
+                점수 입력 →
+              </Tag>
+            )}
+            {buttonType === "setting" && (
+              <Tag color="#cd201f" onClick={() => (window.location.href = "/admin")}>
+                ← 관리자 홈
+              </Tag>
+            )}
           </Col>
         </Row>
       ) : (
