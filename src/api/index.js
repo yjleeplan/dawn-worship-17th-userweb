@@ -18,10 +18,7 @@ const headers = (header) => {
 
 // api
 export const createUser = ({ data }) => {
-  return request.post("/users",
-    data,
-    headers(),
-  );
+  return request.post("/users", data, headers());
 };
 
 export const listUser = ({ query }) => {
@@ -45,17 +42,11 @@ export const selectUser = ({ path }) => {
 };
 
 export const updatedAttendance = ({ path, data }) => {
-  return request.put(`/attendance/${path.attendance_id}`,
-    data,
-    headers(),
-  );
+  return request.put(`/attendance/${path.attendance_id}`, data, headers());
 };
 
 export const createComment = ({ data }) => {
-  return request.post("/comments",
-    data,
-    headers(),
-  );
+  return request.post("/comments", data, headers());
 };
 
 export const listComment = ({ query }) => {
@@ -63,4 +54,15 @@ export const listComment = ({ query }) => {
     params: query,
     ...headers(),
   });
+};
+
+export const listDepartmentCount = ({ query }) => {
+  return request.get("/department/count", {
+    params: query,
+    ...headers(),
+  });
+};
+
+export const updateDepartmentFreeCount = ({ path, data }) => {
+  return request.put(`/department/${path.department_id}/free_count`, data, headers());
 };
