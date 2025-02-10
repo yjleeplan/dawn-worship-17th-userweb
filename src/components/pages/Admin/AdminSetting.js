@@ -1,6 +1,7 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { Select } from "antd";
+import { Select, message } from "antd";
 import React, { useState } from "react";
+import * as api from "../../../api";
 
 const Admin = ({ setIsLoading }) => {
   // 소속 리스트
@@ -17,15 +18,51 @@ const Admin = ({ setIsLoading }) => {
   ];
 
   /** State */
-  const [selectedKey, setSelectedKey] = useState();
-  const [point, setPoint] = useState(115);
+  const [selectedDepartment, setSelectedDepartment] = useState();
 
-  const plus = () => {
-    setPoint((prev) => prev + 1);
+  // 마을별 수기 카운트 조회 API
+  const handleListDepartmentCount = async (departmentName) => {
+    try {
+      setIsLoading(true);
+      const { data: departmentData = [] } = await api.listDepartmentCount({
+        query: { department: departmentName },
+      });
+      setSelectedDepartment(departmentData[0]);
+    } catch (error) {
+      message.error(
+        error.response ? `${error.response.data.code}, ${error.response.data.message}` : "마을별 수기 카운트 조회 실패"
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  // 마을별 수기 카운트 변경 API
+  const handleUpdateDepartmentCount = async (value) => {
+    try {
+      setIsLoading(true);
+
+      const { data } = await api.updateDepartmentFreeCount({
+        path: { department_id: selectedDepartment?.department_id },
+        data: { add_count: Number(value) },
+      });
+
+      setSelectedDepartment((prev) => ({ ...prev, attendance_free_count: data?.attendance_free_count }));
+    } catch (error) {
+      message.error(error.response ? `${error.response.data.message}` : "마을별 수기 카운트 변경 실패");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // - 버튼
   const minus = () => {
-    setPoint((prev) => prev - 1);
+    handleUpdateDepartmentCount(-1);
+  };
+
+  // + 버튼
+  const plus = () => {
+    handleUpdateDepartmentCount(1);
   };
 
   return (
@@ -36,12 +73,12 @@ const Admin = ({ setIsLoading }) => {
           options={deptOptions}
           size="large"
           getPopupContainer={() => document.getElementById("admin-select-wrap")}
-          onSelect={(key) => setSelectedKey(key)}
+          onSelect={(key) => handleListDepartmentCount(key)}
         />
       </div>
-      {selectedKey && (
+      {selectedDepartment && (
         <>
-          <div className="point-wrap">{point}</div>
+          <div className="point-wrap">{selectedDepartment?.attendance_free_count?.toLocaleString() ?? 0}</div>
           <div className="button-wrap">
             <div className="button-3d blue" onClick={minus}>
               <MinusOutlined style={{ fontSize: "50px" }} />

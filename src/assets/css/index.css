@@ -562,6 +562,7 @@ body,
 #admin-setting-wrap .point-wrap {
   margin: 40px 0;
   text-align: center;
+  text-shadow: 2px 2px #000;
   font-size: 60px;
   color: #fff;
 }
