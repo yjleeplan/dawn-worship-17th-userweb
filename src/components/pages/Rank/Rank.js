@@ -1,5 +1,6 @@
-import { Image, Modal } from "antd";
+import { Image, Modal, message } from "antd";
 import React, { useEffect, useState } from "react";
+import * as api from "../../../api";
 import player3 from "../../../assets/images/player_3.gif";
 
 // #rank-layout width -> document.getElementById("rank-layout").offsetWidth
@@ -18,6 +19,56 @@ const Rank = ({ setIsLoading, isMobile }) => {
     lane8: 0,
     lane9: 0,
   });
+
+  // 마을별 출석 카운트 조회 API
+  const handleListDepartmentCount = async () => {
+    try {
+      const { data: departmentData = [] } = await api.listDepartmentCount({
+        query: {},
+      });
+      let newData = {
+        lane1: 0,
+        lane2: 0,
+        lane3: 0,
+        lane4: 0,
+        lane5: 0,
+        lane6: 0,
+        lane7: 0,
+        lane8: 0,
+        lane9: 0,
+      };
+
+      departmentData?.map((item) => {
+        if (item?.department_name === "소담마을") {
+          newData.lane1 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "도담마을") {
+          newData.lane2 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "어울림마을") {
+          newData.lane3 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "울림마을") {
+          newData.lane4 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "이음마을") {
+          newData.lane5 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "에하드") {
+          newData.lane6 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "세붐마을") {
+          newData.lane7 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "새움청년부") {
+          newData.lane8 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "주일학교") {
+          newData.lane9 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        }
+      });
+
+      setPlayers(newData);
+    } catch (error) {
+      message.error(
+        error.response ? `${error.response.data.code}, ${error.response.data.message}` : "마을별 출석 카운트 조회 실패"
+      );
+    } finally {
+      // setIsLoading(false);
+    }
+  };
 
   // Player width size
   const playerWidth = Number((window.innerWidth * 7) / 100).toFixed(2);
@@ -76,9 +127,11 @@ const Rank = ({ setIsLoading, isMobile }) => {
       });
     }
 
-    // TODO : 추후에 API로 대체해야 함.
     // simulate();
-    setInterval(() => simulate(), 2000);
+    // setInterval(() => simulate(), 2000);
+
+    handleListDepartmentCount();
+    setInterval(() => handleListDepartmentCount(), 60000);
     // eslint-disable-next-line
   }, []);
 
