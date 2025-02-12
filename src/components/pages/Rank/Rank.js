@@ -1,5 +1,8 @@
-import { Image, Modal } from "antd";
+import { Image, Modal, message } from "antd";
+import confetti from "canvas-confetti";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
+import * as api from "../../../api";
 import player3 from "../../../assets/images/player_3.gif";
 
 // #rank-layout width -> document.getElementById("rank-layout").offsetWidth
@@ -18,6 +21,56 @@ const Rank = ({ setIsLoading, isMobile }) => {
     lane8: 0,
     lane9: 0,
   });
+
+  // 마을별 출석 카운트 조회 API
+  const handleListDepartmentCount = async () => {
+    try {
+      const { data: departmentData = [] } = await api.listDepartmentCount({
+        query: {},
+      });
+      let newData = {
+        lane1: 0,
+        lane2: 0,
+        lane3: 0,
+        lane4: 0,
+        lane5: 0,
+        lane6: 0,
+        lane7: 0,
+        lane8: 0,
+        lane9: 0,
+      };
+
+      _.forEach(departmentData, (item, key) => {
+        if (item?.department_name === "소담마을") {
+          newData.lane1 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "도담마을") {
+          newData.lane2 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "어울림마을") {
+          newData.lane3 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "울림마을") {
+          newData.lane4 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "이음마을") {
+          newData.lane5 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "에하드") {
+          newData.lane6 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "세붐마을") {
+          newData.lane7 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "새움청년부") {
+          newData.lane8 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        } else if (item?.department_name === "주일학교") {
+          newData.lane9 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        }
+      });
+
+      setPlayers(newData);
+    } catch (error) {
+      message.error(
+        error.response ? `${error.response.data.code}, ${error.response.data.message}` : "마을별 출석 카운트 조회 실패"
+      );
+    } finally {
+      // setIsLoading(false);
+    }
+  };
 
   // Player width size
   const playerWidth = Number((window.innerWidth * 7) / 100).toFixed(2);
@@ -49,18 +102,81 @@ const Rank = ({ setIsLoading, isMobile }) => {
   };
 
   // 시뮬레이션 (테스트용)
-  const simulate = () => {
-    setPlayers((prev) => ({
-      lane1: prev.lane1 + 2,
-      lane2: prev.lane2 + 10,
-      lane3: prev.lane3 + 9,
-      lane4: prev.lane4 + 7,
-      lane5: prev.lane5 + 1,
-      lane6: prev.lane6 + 12,
-      lane7: prev.lane7 + 8,
-      lane8: prev.lane8 + 3,
-      lane9: prev.lane9 + 6,
-    }));
+  // const simulate = () => {
+  //   setPlayers((prev) => ({
+  //     lane1: prev.lane1 + 2,
+  //     lane2: prev.lane2 + 10,
+  //     lane3: prev.lane3 + 9,
+  //     lane4: prev.lane4 + 7,
+  //     lane5: prev.lane5 + 1,
+  //     lane6: prev.lane6 + 12,
+  //     lane7: prev.lane7 + 8,
+  //     lane8: prev.lane8 + 3,
+  //     lane9: prev.lane9 + 6,
+  //   }));
+  // };
+
+  // 위쪽 폭죽 에니메이션 헨들러
+  const handleConfetti1 = () => {
+    const duration = 6 * 1000; // 6초
+    const animationEnd = Date.now() + duration;
+
+    const randomInRange = (min, max) => {
+      return Math.random() * (max - min) + min;
+    };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        // 시간 다 끝나면 폭죽 제거
+        return clearInterval(interval);
+      }
+
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { x: 0.2, y: 0.2 },
+      });
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { x: 0.8, y: 0.2 },
+      });
+    }, 1000);
+  };
+
+  // 양쪽 폭죽 에니메이션 헨들러
+  const handleConfetti2 = () => {
+    const duration = 5 * 1000; // 5초
+    const animationEnd = Date.now() + duration;
+    const colors = ["#bb0000", "#ffffff"];
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        // 시간 다 끝나면 폭죽 제거
+        return clearInterval(interval);
+      }
+
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 130,
+        origin: { x: 0, y: 0.3 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 130,
+        origin: { x: 1, y: 0.3 },
+        colors: colors,
+      });
+    }, 10);
   };
 
   /** Effect */
@@ -76,9 +192,15 @@ const Rank = ({ setIsLoading, isMobile }) => {
       });
     }
 
-    // TODO : 추후에 API로 대체해야 함.
     // simulate();
-    setInterval(() => simulate(), 2000);
+    // setInterval(() => simulate(), 2000);
+
+    handleListDepartmentCount();
+    handleConfetti1();
+
+    setInterval(() => handleConfetti1(), 13000);
+    setInterval(() => handleConfetti2(), 30000);
+    setInterval(() => handleListDepartmentCount(), 60000);
     // eslint-disable-next-line
   }, []);
 
