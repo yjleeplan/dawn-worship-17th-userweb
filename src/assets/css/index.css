@@ -539,6 +539,7 @@ body,
 
 #rank-layout .player {
   width: fit-content;
+  transition: all 500ms linear;
 }
 /* Rank Layout */
 
