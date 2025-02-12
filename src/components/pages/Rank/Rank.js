@@ -1,5 +1,6 @@
 import { Image, Modal, message } from "antd";
 import confetti from "canvas-confetti";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../api";
 import player3 from "../../../assets/images/player_3.gif";
@@ -39,7 +40,7 @@ const Rank = ({ setIsLoading, isMobile }) => {
         lane9: 0,
       };
 
-      departmentData?.map((item) => {
+      _.forEach(departmentData, (item, key) => {
         if (item?.department_name === "소담마을") {
           newData.lane1 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "도담마을") {
@@ -101,19 +102,19 @@ const Rank = ({ setIsLoading, isMobile }) => {
   };
 
   // 시뮬레이션 (테스트용)
-  const simulate = () => {
-    setPlayers((prev) => ({
-      lane1: prev.lane1 + 2,
-      lane2: prev.lane2 + 10,
-      lane3: prev.lane3 + 9,
-      lane4: prev.lane4 + 7,
-      lane5: prev.lane5 + 1,
-      lane6: prev.lane6 + 12,
-      lane7: prev.lane7 + 8,
-      lane8: prev.lane8 + 3,
-      lane9: prev.lane9 + 6,
-    }));
-  };
+  // const simulate = () => {
+  //   setPlayers((prev) => ({
+  //     lane1: prev.lane1 + 2,
+  //     lane2: prev.lane2 + 10,
+  //     lane3: prev.lane3 + 9,
+  //     lane4: prev.lane4 + 7,
+  //     lane5: prev.lane5 + 1,
+  //     lane6: prev.lane6 + 12,
+  //     lane7: prev.lane7 + 8,
+  //     lane8: prev.lane8 + 3,
+  //     lane9: prev.lane9 + 6,
+  //   }));
+  // };
 
   // 위쪽 폭죽 에니메이션 헨들러
   const handleConfetti1 = () => {
@@ -199,7 +200,7 @@ const Rank = ({ setIsLoading, isMobile }) => {
 
     setInterval(() => handleConfetti1(), 13000);
     setInterval(() => handleConfetti2(), 30000);
-    setInterval(() => handleListDepartmentCount(), 60000);
+    //setInterval(() => handleListDepartmentCount(), 10000);
     // eslint-disable-next-line
   }, []);
 
