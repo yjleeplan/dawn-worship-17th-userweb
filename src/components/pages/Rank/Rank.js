@@ -200,7 +200,7 @@ const Rank = ({ setIsLoading, isMobile }) => {
 
     setInterval(() => handleConfetti1(), 13000);
     setInterval(() => handleConfetti2(), 30000);
-    //setInterval(() => handleListDepartmentCount(), 10000);
+    setInterval(() => handleListDepartmentCount(), 60000);
     // eslint-disable-next-line
   }, []);
 
