@@ -1,4 +1,5 @@
 import { Image, Modal, message } from "antd";
+import confetti from "canvas-confetti";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../api";
 import player3 from "../../../assets/images/player_3.gif";
@@ -114,6 +115,69 @@ const Rank = ({ setIsLoading, isMobile }) => {
     }));
   };
 
+  // 위쪽 폭죽 에니메이션 헨들러
+  const handleConfetti1 = () => {
+    const duration = 6 * 1000; // 6초
+    const animationEnd = Date.now() + duration;
+
+    const randomInRange = (min, max) => {
+      return Math.random() * (max - min) + min;
+    };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        // 시간 다 끝나면 폭죽 제거
+        return clearInterval(interval);
+      }
+
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { x: 0.2, y: 0.2 },
+      });
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { x: 0.8, y: 0.2 },
+      });
+    }, 1000);
+  };
+
+  // 양쪽 폭죽 에니메이션 헨들러
+  const handleConfetti2 = () => {
+    const duration = 5 * 1000; // 5초
+    const animationEnd = Date.now() + duration;
+    const colors = ["#bb0000", "#ffffff"];
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        // 시간 다 끝나면 폭죽 제거
+        return clearInterval(interval);
+      }
+
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 130,
+        origin: { x: 0, y: 0.3 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 130,
+        origin: { x: 1, y: 0.3 },
+        colors: colors,
+      });
+    }, 10);
+  };
+
   /** Effect */
   useEffect(() => {
     // 모바일로 접속 시 메인 화면으로 이동
@@ -131,6 +195,10 @@ const Rank = ({ setIsLoading, isMobile }) => {
     // setInterval(() => simulate(), 2000);
 
     handleListDepartmentCount();
+    handleConfetti1();
+
+    setInterval(() => handleConfetti1(), 13000);
+    setInterval(() => handleConfetti2(), 30000);
     setInterval(() => handleListDepartmentCount(), 60000);
     // eslint-disable-next-line
   }, []);
