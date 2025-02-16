@@ -205,7 +205,40 @@ const Rank = ({ setIsLoading, isMobile }) => {
           window.location.href = "/main";
         },
       });
+      return false;
     }
+
+    // 테블릿으로 접속 시 메인 화면으로 이동
+    if (window.innerWidth < 1280) {
+      Modal.warning({
+        title: "PC로만 접속 가능합니다.",
+        okText: "확인",
+        onOk: async () => {
+          window.location.href = "/main";
+        },
+      });
+      return false;
+    }
+
+    const infoMessage = () => {
+      let secondsToGo = 5;
+      const modal = Modal.warning({
+        width: 500,
+        title: "키보드 'F11'을 누르시면 더 정확하게 보실 수 있습니다.",
+        content: `(${secondsToGo}초 후 창이 자동으로 닫힙니다.)`,
+      });
+      const timer = setInterval(() => {
+        secondsToGo -= 1;
+        modal.update({
+          content: `(${secondsToGo}초 후 창이 자동으로 닫힙니다.)`,
+        });
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(timer);
+        modal.destroy();
+      }, secondsToGo * 1000);
+    };
+    infoMessage();
 
     // simulate();
     // setInterval(() => simulate(), 2000);
