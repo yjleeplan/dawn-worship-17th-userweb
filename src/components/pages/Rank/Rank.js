@@ -43,23 +43,41 @@ const Rank = ({ setIsLoading, isMobile }) => {
       // 마을별 평균값을 구하여 newData에 저장
       _.forEach(departmentData, (item, key) => {
         if (item?.department_name === "소담마을") {
-          newData[0].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[0].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "도담마을") {
-          newData[1].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[1].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "어울림마을") {
-          newData[2].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[2].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "울림마을") {
-          newData[3].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[3].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "이음마을") {
-          newData[4].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[4].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "에하드") {
-          newData[5].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[5].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "세붐마을") {
-          newData[6].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[6].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "새움청년부") {
-          newData[7].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[7].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         } else if (item?.department_name === "주일학교") {
-          newData[8].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[8].percent = parseFloat(
+            Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2)
+          );
         }
       });
 
@@ -77,6 +95,7 @@ const Rank = ({ setIsLoading, isMobile }) => {
           item.status = "sad";
         }
       });
+      console.log(newData, orderByPercentList);
 
       setPlayers(newData);
     } catch (error) {
