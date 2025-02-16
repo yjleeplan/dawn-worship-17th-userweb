@@ -1,26 +1,26 @@
-import { Image, Modal, message } from "antd";
+import { Modal, message } from "antd";
 import confetti from "canvas-confetti";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import * as api from "../../../api";
-import player3 from "../../../assets/images/player_3.gif";
+import Player from "../../common/Player";
 
 // #rank-layout width -> document.getElementById("rank-layout").offsetWidth
 // body width -> document.body.offsetWidth
 
 const Rank = ({ setIsLoading, isMobile }) => {
   /** State */
-  const [players, setPlayers] = useState({
-    lane1: 0,
-    lane2: 0,
-    lane3: 0,
-    lane4: 0,
-    lane5: 0,
-    lane6: 0,
-    lane7: 0,
-    lane8: 0,
-    lane9: 0,
-  });
+  const [players, setPlayers] = useState([
+    { lane: 1, percent: 0, status: "base" },
+    { lane: 2, percent: 0, status: "base" },
+    { lane: 3, percent: 0, status: "base" },
+    { lane: 4, percent: 0, status: "base" },
+    { lane: 5, percent: 0, status: "base" },
+    { lane: 6, percent: 0, status: "base" },
+    { lane: 7, percent: 0, status: "base" },
+    { lane: 8, percent: 0, status: "base" },
+    { lane: 9, percent: 0, status: "base" },
+  ]);
 
   // 마을별 출석 카운트 조회 API
   const handleListDepartmentCount = async () => {
@@ -28,37 +28,53 @@ const Rank = ({ setIsLoading, isMobile }) => {
       const { data: departmentData = [] } = await api.listDepartmentCount({
         query: {},
       });
-      let newData = {
-        lane1: 0,
-        lane2: 0,
-        lane3: 0,
-        lane4: 0,
-        lane5: 0,
-        lane6: 0,
-        lane7: 0,
-        lane8: 0,
-        lane9: 0,
-      };
+      let newData = [
+        { lane: 1, percent: 0, status: "base" },
+        { lane: 2, percent: 0, status: "base" },
+        { lane: 3, percent: 0, status: "base" },
+        { lane: 4, percent: 0, status: "base" },
+        { lane: 5, percent: 0, status: "base" },
+        { lane: 6, percent: 0, status: "base" },
+        { lane: 7, percent: 0, status: "base" },
+        { lane: 8, percent: 0, status: "base" },
+        { lane: 9, percent: 0, status: "base" },
+      ];
 
+      // 마을별 평균값을 구하여 newData에 저장
       _.forEach(departmentData, (item, key) => {
         if (item?.department_name === "소담마을") {
-          newData.lane1 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[0].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "도담마을") {
-          newData.lane2 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[1].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "어울림마을") {
-          newData.lane3 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[2].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "울림마을") {
-          newData.lane4 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[3].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "이음마을") {
-          newData.lane5 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[4].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "에하드") {
-          newData.lane6 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[5].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "세붐마을") {
-          newData.lane7 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[6].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "새움청년부") {
-          newData.lane8 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[7].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
         } else if (item?.department_name === "주일학교") {
-          newData.lane9 = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+          newData[8].percent = Number((item?.total_attendance_count * 100) / item?.max_attendance_count).toFixed(2);
+        }
+      });
+
+      // 평균값을 기준으로 정렬
+      const orderByPercentList = _.orderBy(newData, "percent", "desc");
+
+      _.forEach(newData, (item, key) => {
+        // 1~2등의 status 변경
+        if (item?.lane === orderByPercentList[0].lane || item?.lane === orderByPercentList[1].lane) {
+          item.status = "glad";
+        }
+
+        // 8~9등의 status 변경
+        if (item?.lane === orderByPercentList[7].lane || item?.lane === orderByPercentList[8].lane) {
+          item.status = "sad";
         }
       });
 
@@ -95,8 +111,7 @@ const Rank = ({ setIsLoading, isMobile }) => {
     const lanePaddingLeftPx = (window.innerWidth * lanePaddingLeft(0)) / 100;
     const lanePaddingRightPx = (window.innerWidth * lanePaddingRight(0)) / 100;
     const step = Number((window.innerWidth - lanePaddingLeftPx - lanePaddingRightPx - playerWidth) / 100).toFixed(3);
-    const key = `lane${Number(index) + 1}`;
-    const percent = Number(players[key]).toFixed(2) > 100 ? 100 : Number(players[key]).toFixed(2);
+    const percent = Number(players[index].percent).toFixed(2) > 100 ? 100 : Number(players[index].percent).toFixed(2);
 
     return Number(step) * percent;
   };
@@ -208,47 +223,47 @@ const Rank = ({ setIsLoading, isMobile }) => {
     <>
       <div className="lane" style={{ top: `${laneTop(0)}%`, paddingLeft: `${lanePaddingLeft(0)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(0)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={1} playerWidth={playerWidth} playerStatus={players[0].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(1)}%`, paddingLeft: `${lanePaddingLeft(1)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(1)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={2} playerWidth={playerWidth} playerStatus={players[1].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(2)}%`, paddingLeft: `${lanePaddingLeft(2)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(2)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={3} playerWidth={playerWidth} playerStatus={players[2].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(3)}%`, paddingLeft: `${lanePaddingLeft(3)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(3)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={4} playerWidth={playerWidth} playerStatus={players[3].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(4)}%`, paddingLeft: `${lanePaddingLeft(4)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(4)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={5} playerWidth={playerWidth} playerStatus={players[4].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(5)}%`, paddingLeft: `${lanePaddingLeft(5)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(5)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={6} playerWidth={playerWidth} playerStatus={players[5].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(6)}%`, paddingLeft: `${lanePaddingLeft(6)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(6)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={7} playerWidth={playerWidth} playerStatus={players[6].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(7)}%`, paddingLeft: `${lanePaddingLeft(7)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(7)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={8} playerWidth={playerWidth} playerStatus={players[7].status} />
         </div>
       </div>
       <div className="lane" style={{ top: `${laneTop(8)}%`, paddingLeft: `${lanePaddingLeft(8)}%` }}>
         <div className="player" style={{ marginLeft: `${getPlayerStep(8)}px` }}>
-          <Image width={`${playerWidth}px`} src={player3} preview={false} />
+          <Player laneNo={9} playerWidth={playerWidth} playerStatus={players[8].status} />
         </div>
       </div>
     </>
