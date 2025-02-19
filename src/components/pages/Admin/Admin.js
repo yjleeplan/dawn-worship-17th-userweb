@@ -41,7 +41,7 @@ const Admin = ({ setIsLoading }) => {
 
   // 사진 링크
   const handlePictureClick = () => {
-    window.open("https://m.post.naver.com/my/series/detail.naver?seriesNo=744663&memberNo=28453879");
+    window.open("https://blog.naver.com/elohimg/223765649591");
   };
 
   return (

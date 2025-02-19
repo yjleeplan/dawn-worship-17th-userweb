@@ -114,7 +114,7 @@ const RankMobile = ({ setIsLoading }) => {
         <Image width={300} height={160} src={title} preview={false} />
       </div>
       <div className="rank-mobile-content">
-        {_.map(players, (item, key) => {
+        {_.map(players, (item, index) => {
           return (
             <div className="player-wrap">
               <div className="player">
@@ -130,7 +130,7 @@ const RankMobile = ({ setIsLoading }) => {
                   percent={item?.percent}
                 />
                 <div className="player-percent">{item?.percent}%</div>
-                <div className="rank-number">#{key + 1}</div>
+                <div className="rank-number">#{index + 1}</div>
               </div>
             </div>
           );
