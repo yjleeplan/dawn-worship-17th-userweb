@@ -11,15 +11,15 @@ import Player from "../../common/Player";
 const RankMobile = ({ setIsLoading }) => {
   /** State */
   const [players, setPlayers] = useState([
-    { lane: 1, percent: 0, status: "base" },
-    { lane: 2, percent: 0, status: "base" },
-    { lane: 3, percent: 0, status: "base" },
-    { lane: 4, percent: 0, status: "base" },
-    { lane: 5, percent: 0, status: "base" },
-    { lane: 6, percent: 0, status: "base" },
-    { lane: 7, percent: 0, status: "base" },
-    { lane: 8, percent: 0, status: "base" },
-    { lane: 9, percent: 0, status: "base" },
+    { lane: 1, percent: 0, status: "base", rankNumber: '1st' },
+    { lane: 2, percent: 0, status: "base", rankNumber: '2nd' },
+    { lane: 3, percent: 0, status: "base", rankNumber: '3rd' },
+    { lane: 4, percent: 0, status: "base", rankNumber: '4th' },
+    { lane: 5, percent: 0, status: "base", rankNumber: '5th' },
+    { lane: 6, percent: 0, status: "base", rankNumber: '6th' },
+    { lane: 7, percent: 0, status: "base", rankNumber: '7th' },
+    { lane: 8, percent: 0, status: "base", rankNumber: '8th' },
+    { lane: 9, percent: 0, status: "base", rankNumber: '9th' },
   ]);
 
   // 마을별 출석 카운트 조회 API
@@ -130,7 +130,7 @@ const RankMobile = ({ setIsLoading }) => {
                   percent={item?.percent}
                 />
                 <div className="player-percent">{item?.percent}%</div>
-                <div className="rank-number">#{key + 1}</div>
+                <div className="rank-number">{item?.rankNumber}</div>
               </div>
             </div>
           );
