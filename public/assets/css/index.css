@@ -541,7 +541,133 @@ body,
   width: fit-content;
   transition: all 500ms linear;
 }
+
+/* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100dvh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+} */
 /* Rank Layout */
+
+/* Rank Mobile Layout */
+#rank-mobile-layout {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  background-image: url(/src/assets/images/background.jpg);
+  /* background-image: url(/src/assets/images/happysun_190218__030.jpg); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* background-color: currentColor; */
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  position: fixed;
+  overflow-y: scroll;
+}
+
+#rank-mobile-layout #header {
+  width: 90%;
+  min-height: 6vh;
+  padding: 20px 0px;
+  margin: auto;
+}
+
+#rank-mobile-layout #content .rank-mobile-title {
+  height: 160px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#rank-mobile-layout #content .rank-mobile-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px auto;
+}
+
+#rank-mobile-layout #content .player-wrap {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
+#rank-mobile-layout #content .player-wrap .player {
+  width: fit-content;
+  transition: all 500ms linear;
+  padding: 10px 20px;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+  position: relative;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .ant-progress.ant-progress-line {
+  padding: 10px 20px;
+  position: relative;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .player-percent {
+  font-size: 14px;
+  position: absolute;
+  width: 100%;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .ant-progress-outer {
+  padding: 0;
+  margin: 0;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .ant-progress-inner {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .ant-progress-bg {
+  height: 20px !important;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .ant-progress-text {
+  display: none;
+}
+
+#rank-mobile-layout #content .player-wrap .player-progress-wrap .rank-number {
+  color: #fff;
+  font-size: 40px;
+  text-shadow: 2px 2px #000;
+}
+/* Rank Mobile Layout */
 
 /* Admin Setting */
 #admin-setting-wrap {

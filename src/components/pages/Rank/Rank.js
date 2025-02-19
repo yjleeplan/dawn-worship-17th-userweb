@@ -108,7 +108,7 @@ const Rank = ({ setIsLoading, isMobile }) => {
   };
 
   // Player width size
-  const playerWidth = Number((window.innerWidth * 7) / 100).toFixed(2);
+  const playerWidth = Number((document.body.offsetWidth * 7) / 100).toFixed(2);
 
   // Lane top size
   const laneTop = (index) => {
@@ -127,9 +127,11 @@ const Rank = ({ setIsLoading, isMobile }) => {
 
   // Player의 이동거리 추출
   const getPlayerStep = (index) => {
-    const lanePaddingLeftPx = (window.innerWidth * lanePaddingLeft(0)) / 100;
-    const lanePaddingRightPx = (window.innerWidth * lanePaddingRight(0)) / 100;
-    const step = Number((window.innerWidth - lanePaddingLeftPx - lanePaddingRightPx - playerWidth) / 100).toFixed(3);
+    const lanePaddingLeftPx = (document.body.offsetWidth * lanePaddingLeft(0)) / 100;
+    const lanePaddingRightPx = (document.body.offsetWidth * lanePaddingRight(0)) / 100;
+    const step = Number(
+      (document.body.offsetWidth - lanePaddingLeftPx - lanePaddingRightPx - playerWidth) / 100
+    ).toFixed(3);
     const percent = Number(players[index].percent).toFixed(2) > 100 ? 100 : Number(players[index].percent).toFixed(2);
 
     return Number(step) * percent;
@@ -216,58 +218,68 @@ const Rank = ({ setIsLoading, isMobile }) => {
   /** Effect */
   useEffect(() => {
     // 모바일로 접속 시 메인 화면으로 이동
-    if (isMobile()) {
-      Modal.warning({
-        title: "PC로만 접속 가능합니다.",
-        okText: "확인",
-        onOk: async () => {
-          window.location.href = "/main";
-        },
-      });
-      return false;
-    }
+    // if (isMobile()) {
+    //   Modal.warning({
+    //     title: "PC로만 접속 가능합니다.",
+    //     okText: "확인",
+    //     onOk: async () => {
+    //       window.location.href = "/main";
+    //     },
+    //   });
+    //   return false;
+    // }
 
     // 테블릿으로 접속 시 메인 화면으로 이동
-    if (window.innerWidth < 1280) {
-      Modal.warning({
-        title: "PC로만 접속 가능합니다.",
-        okText: "확인",
-        onOk: async () => {
-          window.location.href = "/main";
-        },
-      });
-      return false;
-    }
+    // if (window.innerWidth < 1280) {
+    //   Modal.warning({
+    //     title: "PC로만 접속 가능합니다.",
+    //     okText: "확인",
+    //     onOk: async () => {
+    //       window.location.href = "/main";
+    //     },
+    //   });
+    //   return false;
+    // }
 
-    const infoMessage = () => {
-      let secondsToGo = 5;
-      const modal = Modal.warning({
-        width: 500,
-        title: "키보드 'F11'을 누르시면 더 정확하게 보실 수 있습니다.",
-        content: `(${secondsToGo}초 후 창이 자동으로 닫힙니다.)`,
-      });
-      const timer = setInterval(() => {
-        secondsToGo -= 1;
-        modal.update({
+    if (isMobile()) {
+      handleListDepartmentCount();
+    } else {
+      const infoMessage = () => {
+        let secondsToGo = 5;
+        const modal = Modal.warning({
+          width: 500,
+          title: (
+            <>
+              <p style={{ marginBottom: 0 }}>테블릿에서는 '가로모드'로</p>
+              <p style={{ marginBottom: "10px" }}>PC에서는 키보드 'F11'을 누르시면 </p>
+              <p style={{ marginBottom: "20px" }}>더 정확하게 보실 수 있습니다.</p>
+            </>
+          ),
           content: `(${secondsToGo}초 후 창이 자동으로 닫힙니다.)`,
         });
-      }, 1000);
-      setTimeout(() => {
-        clearInterval(timer);
-        modal.destroy();
-      }, secondsToGo * 1000);
-    };
-    infoMessage();
+        const timer = setInterval(() => {
+          secondsToGo -= 1;
+          modal.update({
+            content: `(${secondsToGo}초 후 창이 자동으로 닫힙니다.)`,
+          });
+        }, 1000);
+        setTimeout(() => {
+          clearInterval(timer);
+          modal.destroy();
+        }, secondsToGo * 1000);
+      };
+      infoMessage();
 
-    // simulate();
-    // setInterval(() => simulate(), 2000);
+      // simulate();
+      // setInterval(() => simulate(), 2000);
 
-    handleListDepartmentCount();
-    handleConfetti1();
+      handleListDepartmentCount();
+      handleConfetti1();
 
-    setInterval(() => handleConfetti1(), 13000);
-    setInterval(() => handleConfetti2(), 30000);
-    setInterval(() => handleListDepartmentCount(), 60000);
+      setInterval(() => handleConfetti1(), 13000);
+      setInterval(() => handleConfetti2(), 30000);
+      setInterval(() => handleListDepartmentCount(), 60000);
+    }
     // eslint-disable-next-line
   }, []);
 

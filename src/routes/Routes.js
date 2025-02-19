@@ -3,10 +3,12 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ScrollToTop from "../components/common/ScrollToTop";
 import MainLayout from "../components/layouts/MainLayout/MainLayout";
 import RankLayout from "../components/layouts/RankLayout/RankLayout";
+import RankMobileLayout from "../components/layouts/RankMobileLayout/RankMobileLayout";
 import Admin from "../components/pages/Admin/Admin";
 import AdminSetting from "../components/pages/Admin/AdminSetting";
 import Main from "../components/pages/Main/Main";
 import Rank from "../components/pages/Rank/Rank";
+import RankMobile from "../components/pages/RankMobile/RankMobile";
 
 const Routes = () => {
   // 접속 기기 체크
@@ -52,11 +54,17 @@ const Routes = () => {
         <Route
           exact
           path="/rank"
-          render={(props) => (
-            <RankLayout>
-              <Rank {...props} isMobile={isMobile} />
-            </RankLayout>
-          )}
+          render={(props) =>
+            isMobile() ? (
+              <RankMobileLayout>
+                <RankMobile {...props} />
+              </RankMobileLayout>
+            ) : (
+              <RankLayout>
+                <Rank {...props} isMobile={isMobile} />
+              </RankLayout>
+            )
+          }
         />
         <Route
           exact
