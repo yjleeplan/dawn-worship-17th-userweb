@@ -44,9 +44,7 @@ const Admin = ({ setIsLoading }) => {
 
   // 사진 링크
   const handlePictureClick = () => {
-    window.open(
-      "https://m.blog.naver.com/PostView.naver?blogId=elohimg&logNo=223766887080&navType=by"
-    );
+    window.open("https://blog.naver.com/elohimg");
   };
 
   return (
