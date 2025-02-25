@@ -127,9 +127,9 @@ const RankMobile = ({ setIsLoading }) => {
                     "100%": item?.color,
                   }}
                   status="active"
-                  percent={item?.percent}
+                  percent={item?.percent > 100 ? 100 : item?.percent}
                 />
-                <div className="player-percent">{item?.percent}%</div>
+                <div className="player-percent">{item?.percent > 100 ? 100 : item?.percent}%</div>
                 <div className="rank-number">#{index + 1}</div>
               </div>
             </div>
